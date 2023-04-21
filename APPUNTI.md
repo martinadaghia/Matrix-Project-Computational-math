@@ -5,6 +5,7 @@ Sudoku progetto di Matematica Computazionale
 step da effettuare:
 - creare la griglia 3x3
 - aggiungere qualche numero già presente nella griglia
+- creare una funzione randomica
 - creare diversi livelli di difficoltà
     LIVELLO PRINCIPIANTE --> 4 griglie 3x3
     LIVELLO INTERMEDIO --> 9 griglie 3x3
