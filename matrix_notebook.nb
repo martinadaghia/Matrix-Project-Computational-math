@@ -1,0 +1,1205 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     51251,       1197]
+NotebookOptionsPosition[     45617,       1106]
+NotebookOutlinePosition[     46012,       1122]
+CellTagsIndexPosition[     45969,       1119]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["MATRIX",
+ FontColor->RGBColor[0.6829022659647517, 0., 0.03854428931105516]]], "Title",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.891667283831736*^9}, {3.8920155131198893`*^9, 3.892015515836752*^9}},
+ TextAlignment->Center,ExpressionUUID->"973ccd0d-f4b6-462c-b1de-6d7708371662"],
+
+Cell[TextData[StyleBox["Gruppo Martrix",
+ FontColor->RGBColor[
+  0.7452964065003433, 0., 0.025528343633173113`]]], "Subtitle",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.891667298897653*^9}, {3.891667873860436*^9, 3.891667874995988*^9}, {
+  3.892016385423602*^9, 3.892016393763036*^9}},
+ TextAlignment->Center,ExpressionUUID->"ef84f500-714b-4f07-9cf7-7ad55a77a95e"],
+
+Cell["MC 2022/2023", "Subtitle",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.891667743483822*^9}},
+ TextAlignment->Center,ExpressionUUID->"84afdc46-600c-4f76-bef3-efef0fb441e1"],
+
+Cell[TextData[{
+ "Martina Daghia, Gabriele Fogu, Riccardo Spini, Martina Zauli\n",
+ StyleBox[" (anno 1, curriculum B) (anno 1, curriculum A) (anno 1, curriculum \
+B) (anno 1, curriculum B)",
+  FontSize->18]
+}], "Subtitle",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, 
+   3.8916688258910007`*^9, 3.891669116021771*^9, 3.891670156022627*^9},
+ TextAlignment->Center,ExpressionUUID->"b8d17cd5-8009-4c20-bae3-6f6a3f0bc3e9"],
+
+Cell[TextData[StyleBox["METTERE FOTO DI GRUPPOOOOOOOOO !!!!!!!",
+ FontSize->18]], "Subtitle",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, 
+   3.8916688258910007`*^9, 3.891669116021771*^9, {3.891670157182302*^9, 
+   3.8916701645569553`*^9}, 3.892016024202346*^9, 3.892016515878338*^9},
+ TextAlignment->Center,ExpressionUUID->"572d47dd-601d-4b14-b1fb-5c891509a293"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"(*", " ", 
+    RowBox[{"Caricamento", " ", "del", " ", "pacchetto"}], " ", "*)"}], 
+   "Input",
+   Background->None], 
+  StyleBox["\[IndentingNewLine]", "Input",
+   Background->None], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   StyleBox["\n", "Input",
+    Background->None], 
+   RowBox[{
+    StyleBox[
+     StyleBox[
+      RowBox[{"(", "*"}]], "Input",
+     Background->None], 
+    StyleBox[" ", "Input",
+     Background->None], 
+    RowBox[{"Get", "[", "\"\<matrix_pacchetto.m\>\"", "]"}], " ", "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox["<<", "Input",
+     Background->None], 
+    StyleBox[" ", "Input",
+     Background->None], "matrix_pacchetto.m"}]}]}]], "Input",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, 
+   3.8916688258910007`*^9, 3.891669116021771*^9, {3.891670157182302*^9, 
+   3.8916701645569553`*^9}, {3.892016036698525*^9, 3.892016090346652*^9}, {
+   3.89201613210294*^9, 3.892016169674636*^9}, {3.8920162149348373`*^9, 
+   3.89201622462519*^9}, {3.8922644614129257`*^9, 3.8922644622726393`*^9}, {
+   3.8922645454308453`*^9, 3.8922646008579407`*^9}, {3.8922647699746447`*^9, 
+   3.892264808567184*^9}, {3.892264918713245*^9, 3.892264976352275*^9}, {
+   3.892265056693828*^9, 3.892265077952405*^9}, {3.892265422199375*^9, 
+   3.892265486552566*^9}, {3.892265722227482*^9, 3.892265747125996*^9}, {
+   3.892268123613117*^9, 3.892268166691704*^9}, {3.892268293193817*^9, 
+   3.892268315315259*^9}, {3.8922683650874968`*^9, 
+   3.8922684519533167`*^9}},ExpressionUUID->"eb07ad26-ae2a-4ea2-a7a3-\
+e4cd9d790d51"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"]], True->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"]]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/C",
+              ButtonNote->"paclet:ref/C"],
+             "\"paclet:ref/C\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"\\!\\(\\*RowBox[{\\\"C\\\", \\\"[\\\", \
+StyleBox[\\\"i\\\", \\\"TI\\\"], \\\"]\\\"}]\\) is the default form for the \
+\\!\\(\\*StyleBox[RowBox[{StyleBox[\\\"i\\\", \\\"TI\\\"], \\\"\[Null]\\\"}]]\
+\\)\\!\\(\\*SuperscriptBox[\\\"\[Null]\\\", \\\"th\\\"]\\) parameter or \
+constant generated in representing the results of various symbolic \
+computations. \"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Documentation\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Documentation\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Documentation", "Tooltip"]& ], 
+                   TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"Local \[RightGuillemet]\"", "paclet:ref/C", 
+                    "paclet:ref/C", "Link", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"], "\"  \"", 
+                    StyleBox[
+                    "\"|\"", "InformationRowLabel", StripOnInput -> False], 
+                    "\"  \"", 
+                    TemplateBox[{"\"Web \[RightGuillemet]\"", {
+                    URL["http://reference.wolfram.com/language/ref/C.html"], 
+                    None}, "http://reference.wolfram.com/language/ref/C.html",
+                     "Hyperlink", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"]},
+                    "RowDefault"]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", 
+                    RowBox[{
+                    "NHoldAll", ",", "Protected", ",", "ReadProtected"}], 
+                    "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"System`C\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"],
+                ImageSizeCache->{13., {4., 9.}}], True->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"],
+                ImageSizeCache->{13., {4., 9.}}]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/C",
+              ButtonNote->"paclet:ref/C"],
+             "\"paclet:ref/C\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"\\!\\(\\*RowBox[{\\\"C\\\", \\\"[\\\", \
+StyleBox[\\\"i\\\", \\\"TI\\\"], \\\"]\\\"}]\\) is the default form for the \
+\\!\\(\\*StyleBox[RowBox[{StyleBox[\\\"i\\\", \\\"TI\\\"], \\\"\[Null]\\\"}]]\
+\\)\\!\\(\\*SuperscriptBox[\\\"\[Null]\\\", \\\"th\\\"]\\) parameter or \
+constant generated in representing the results of various symbolic \
+computations. \"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {2., 8.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {2., 8.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "\!\(\*RowBox[{\"C\", \"[\", StyleBox[\"i\", \"TI\"], \"]\"}]\) is the \
+default form for the \!\(\*StyleBox[RowBox[{StyleBox[\"i\", \"TI\"], \
+\"\[Null]\"}]]\)\!\(\*SuperscriptBox[\"\[Null]\", \"th\"]\) parameter or \
+constant generated in representing the results of various symbolic \
+computations. ", 
+    "Documentation" -> <|
+     "Local" -> "paclet:ref/C", "Web" -> 
+      "http://reference.wolfram.com/language/ref/C.html"|>, "OwnValues" -> 
+    None, "UpValues" -> None, "DownValues" -> None, "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {NHoldAll, Protected, ReadProtected}, 
+    "FullName" -> "System`C"|>, False]]], "Output",
+ CellChangeTimes->{
+  3.892268255618311*^9, {3.8922683818325853`*^9, 3.892268402693678*^9}, 
+   3.8922684330794287`*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"11ca27df-78d6-486e-be8e-5b80fce3fa59"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Introduzione", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+  3.891668934645506*^9}, {3.891669244199369*^9, 3.8916692525309553`*^9}, {
+  3.891670111134362*^9, 
+  3.891670117426836*^9}},ExpressionUUID->"4a3b73d1-239a-4cb7-93ae-\
+6667c477d763"],
+
+Cell[TextData[StyleBox["Matrix \[EGrave] un gioco che consiste ...", "Section",
+ FontSize->18,
+ FontColor->GrayLevel[0]]], "Text",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+  3.891668934645506*^9}, {3.891669244199369*^9, 3.8916692525309553`*^9}, {
+  3.891670111134362*^9, 3.8916701484936733`*^9}, {3.8920155793296347`*^9, 
+  3.892015587935175*^9}, {3.892016255699462*^9, 
+  3.8920162756978397`*^9}},ExpressionUUID->"f0c1379c-92d8-46b1-8bdd-\
+a93149e3bee1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["I. Spiegazione del progetto", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+  3.891668934645506*^9}, {3.891669244199369*^9, 3.891669266195595*^9}, {
+  3.8916701742270403`*^9, 3.891670184014534*^9}, {3.892016277486133*^9, 
+  3.89201630457163*^9}},ExpressionUUID->"0d77f93c-9b31-4eee-9e57-\
+04fcd7f8348f"],
+
+Cell[TextData[StyleBox["I.1 sottosezione\nI.2 esempi", "Subsection",
+ FontSize->18]], "Subsection",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+  3.891668934645506*^9}, {3.891669244199369*^9, 3.8916692998233356`*^9}, {
+  3.891669330299753*^9, 3.891669337832341*^9}, {3.891669407933193*^9, 
+  3.891669413555377*^9}, {3.891669618435614*^9, 
+  3.891669620008163*^9}},ExpressionUUID->"01ac96df-c71c-49b6-8d63-\
+f35004bcfb3e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["II. Regole di Matrix", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+   3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+   3.891668934645506*^9}, {3.891669244199369*^9, 3.8916692998233356`*^9}, {
+   3.891669330299753*^9, 3.891669351227581*^9}, {3.89167029719871*^9, 
+   3.8916702998088818`*^9}, {3.8916709704831533`*^9, 3.891670992119886*^9}, 
+   3.892015986288063*^9, 
+   3.8920163096294947`*^9},ExpressionUUID->"11265337-cb3d-4c77-8c08-\
+5a911755c232"],
+
+Cell[TextData[StyleBox["II.1 Creazione tabella\nII.2 Funzione randomica",
+ FontSize->18]], "Subsection",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668923417954*^9, 
+  3.891668934645506*^9}, {3.891669244199369*^9, 3.8916692998233356`*^9}, {
+  3.891669330299753*^9, 3.891669374054166*^9}, {3.891669605758341*^9, 
+  3.891669607775695*^9}, {3.89167099397655*^9, 
+  3.8916710185939007`*^9}},ExpressionUUID->"03fade31-e3b8-4824-a72e-\
+52a73394783a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["III. Gioca ora", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+  3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+  3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+  3.89166882762542*^9, 3.891668854694463*^9}, {3.891668935771819*^9, 
+  3.891668937379916*^9}, {3.891668985842327*^9, 3.8916689924663677`*^9}, {
+  3.891669432660955*^9, 3.891669451304955*^9}, {3.89166953494608*^9, 
+  3.891669584414379*^9}, {3.891670312177773*^9, 3.891670344041651*^9}, {
+  3.891671026779101*^9, 3.8916710318086843`*^9}, {3.892015848788134*^9, 
+  3.892015851050458*^9}},ExpressionUUID->"23bb04d4-5b78-4a72-bac8-\
+b4bd931c0b42"],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"4", " ", "AZIONI", " ", 
+    RowBox[{"POSSIBILI", " ", "--"}]}], ">", " ", 
+   RowBox[{"??", 
+    RowBox[{"?", " ", 
+     RowBox[{
+     "CAPIRE", " ", "COME", " ", "FAR", " ", "SCATURIRE", " ", "LA", " ", 
+      "REAZIONE", " ", "CORRISPONDENTE", " ", "IN", " ", "BASE", " ", "A", 
+      " ", "COSA", " ", "VIENE", " ", "CLICCATO"}]}]}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.892016807112926*^9, 3.89201680712857*^9}, {
+  3.8920173117204647`*^9, 3.892017317750442*^9}, {3.8920192340387783`*^9, 
+  3.8920192558910303`*^9}, {3.892020242886841*^9, 3.892020297121788*^9}, {
+  3.892020333032134*^9, 3.892020396209919*^9}, {3.892020652090472*^9, 
+  3.892020670260737*^9}, {3.892020822459898*^9, 3.8920208278444653`*^9}, {
+  3.8922643289784317`*^9, 
+  3.892264332977003*^9}},ExpressionUUID->"4740d4a1-2d90-4b50-a27a-\
+3ff3d5530c31"],
+
+Cell[BoxData[
+ RowBox[{"Row", "[", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Genera esercizio\>\"", ",", 
+      RowBox[{"randomMatrici", "[", 
+       RowBox[{"2", ",", "3"}], "]"}], ",", " ", 
+      RowBox[{"Method", "->", "\"\<Queued\>\""}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Genera esercizio\>\"", ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"matriceA", ",", "matriceB"}], "}"}], "=", 
+        RowBox[{"randomMatrici", "[", 
+         RowBox[{"2", ",", "3"}], "]"}]}], ";"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Verifica risultato\>\"", ",", 
+      RowBox[{"Print", "[", "\"\<Button 2 pressed\>\"", "]"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Mostra soluzione\>\"", ",", 
+      RowBox[{"Print", "[", "\"\<Button 3 pressed\>\"", "]"}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Button", "[", 
+     RowBox[{"\"\<Pulisci soluzione\>\"", ",", 
+      RowBox[{"Print", "[", "\"\<Button 4 pressed\>\"", "]"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "}"}], "]"}]], "Input",
+ CellChangeTimes->{{3.892016807112926*^9, 3.89201680712857*^9}, {
+   3.8920173117204647`*^9, 3.892017317750442*^9}, {3.8920192340387783`*^9, 
+   3.8920192558910303`*^9}, {3.892020242886841*^9, 3.892020297121788*^9}, {
+   3.892020333032134*^9, 3.892020396209919*^9}, {3.892020652090472*^9, 
+   3.892020670260737*^9}, {3.892020822459898*^9, 3.8920208278444653`*^9}, 
+   3.892020986631412*^9, 3.892021079550631*^9, 3.892021112715131*^9, {
+   3.8920213003907003`*^9, 3.892021319395546*^9}, {3.892264146872242*^9, 
+   3.8922641698311367`*^9}, {3.892265680751595*^9, 3.8922656917823153`*^9}, {
+   3.892265761026668*^9, 3.892265762125539*^9}, {3.892268890809754*^9, 
+   3.892268891975954*^9}, {3.892269072307953*^9, 3.8922690788528557`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"bbe65d03-c47f-4463-b528-9361b007b16c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TemplateBox[{
+   ButtonBox[
+   "\"Genera esercizio\"", ButtonFunction :> $CellContext`randomMatrici[2, 3],
+     Method -> "Queued", Appearance -> Automatic, Evaluator -> Automatic], 
+   ButtonBox[
+   "\"Genera esercizio\"", 
+    ButtonFunction :> ({$CellContext`matriceA, $CellContext`matriceB} = \
+$CellContext`randomMatrici[2, 3]; Null), Appearance -> Automatic, Evaluator -> 
+    Automatic, Method -> "Preemptive"], 
+   ButtonBox[
+   "\"Verifica risultato\"", ButtonFunction :> Print["Button 2 pressed"], 
+    Appearance -> Automatic, Evaluator -> Automatic, Method -> "Preemptive"], 
+   
+   ButtonBox[
+   "\"Mostra soluzione\"", ButtonFunction :> Print["Button 3 pressed"], 
+    Appearance -> Automatic, Evaluator -> Automatic, Method -> "Preemptive"], 
+   
+   ButtonBox[
+   "\"Pulisci soluzione\"", ButtonFunction :> Print["Button 4 pressed"], 
+    Appearance -> Automatic, Evaluator -> Automatic, Method -> "Preemptive"]},
+  
+  "RowDefault"]], "Input",
+ CellChangeTimes->{{3.8922692067970257`*^9, 
+  3.892269210661209*^9}},ExpressionUUID->"aecfa866-c4f7-4cb4-9c37-\
+34251139a7c0"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SeedRandom", "seed", 
+   "\"Argument \\!\\(\\*RowBox[{\\\"$Canceled\\\"}]\\) in \\!\\(\\*RowBox[{\\\
+\"SeedRandom\\\", \\\"[\\\", \\\"$Canceled\\\", \\\"]\\\"}]\\) should be an \
+integer, string, or valid RandomGeneratorState expression.\"", 2, 20, 33, 
+   29105506843654051902, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.892271421340185*^9},
+ CellLabel->"",ExpressionUUID->"180149ae-477f-42a4-933b-ea66a616ff5d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Il seed \[EGrave]: \"\>"], "Print",
+ CellChangeTimes->{3.8922714214082108`*^9},
+ CellLabel->"",ExpressionUUID->"6a3da9f1-4ba4-4546-bd4e-e48e74dc5a4b"],
+
+Cell[BoxData["$Canceled"], "Print",
+ CellChangeTimes->{3.8922714214115267`*^9},
+ CellLabel->"",ExpressionUUID->"3a9755c8-9180-4d84-aa6e-4f05e7c3e531"],
+
+Cell[BoxData["\<\"Matrice randomica A: \"\>"], "Print",
+ CellChangeTimes->{3.892271421416206*^9},
+ CellLabel->"",ExpressionUUID->"deac9916-e87c-4942-a7df-f2350e85ae5b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"9", ",", "3", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3", ",", "8"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.892271421419529*^9},
+ CellLabel->"",ExpressionUUID->"69b23c65-fbb8-4dfa-b57c-ad6f830b472b"],
+
+Cell[BoxData["\<\"Matrice randomica B: \"\>"], "Print",
+ CellChangeTimes->{3.892271421422943*^9},
+ CellLabel->"",ExpressionUUID->"d6a569bc-57a6-436c-88df-3dcd56d01d01"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"9", ",", "1", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "5", ",", "5"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.892271421427783*^9},
+ CellLabel->"",ExpressionUUID->"b04feec1-0af4-45d6-934f-a5f91b67fdfa"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SeedRandom", "seed", 
+   "\"Argument \\!\\(\\*RowBox[{\\\"$Canceled\\\"}]\\) in \\!\\(\\*RowBox[{\\\
+\"SeedRandom\\\", \\\"[\\\", \\\"$Canceled\\\", \\\"]\\\"}]\\) should be an \
+integer, string, or valid RandomGeneratorState expression.\"", 2, 20, 34, 
+   29105506843654051902, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.892271425023574*^9},
+ CellLabel->"",ExpressionUUID->"0c6bb4af-392b-4c71-81cb-dbfe0a23d5e9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Il seed \[EGrave]: \"\>"], "Print",
+ CellChangeTimes->{3.892271425082692*^9},
+ CellLabel->"",ExpressionUUID->"287cc22a-3754-4b32-b575-664d751d4a38"],
+
+Cell[BoxData["$Canceled"], "Print",
+ CellChangeTimes->{3.892271425087656*^9},
+ CellLabel->"",ExpressionUUID->"3115d837-a150-4643-8f3a-0cc9ba7c7dde"],
+
+Cell[BoxData["\<\"Matrice randomica A: \"\>"], "Print",
+ CellChangeTimes->{3.89227142509763*^9},
+ CellLabel->"",ExpressionUUID->"fbea8f41-3d2f-4666-8b7e-1d861963c6eb"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3", ",", "9"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "4", ",", "2"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.89227142510364*^9},
+ CellLabel->"",ExpressionUUID->"31de5231-380d-4edc-a930-2b233d480761"],
+
+Cell[BoxData["\<\"Matrice randomica B: \"\>"], "Print",
+ CellChangeTimes->{3.892271425108777*^9},
+ CellLabel->"",ExpressionUUID->"93ee2235-74eb-4312-bc35-864f602123ee"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "5", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "6", ",", "1"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.892271425115209*^9},
+ CellLabel->"",ExpressionUUID->"b5ea5405-5c82-4258-96da-497123d9df14"],
+
+Cell[BoxData["\<\"Il seed \[EGrave]: \"\>"], "Print",
+ CellChangeTimes->{3.8922714588617687`*^9},
+ CellLabel->"",ExpressionUUID->"504d1c5c-55f0-4151-ab7d-7dfab310fdcc"],
+
+Cell[BoxData["3"], "Print",
+ CellChangeTimes->{3.892271458864931*^9},
+ CellLabel->"",ExpressionUUID->"53e52b36-7acf-4b0c-82b6-9e9b3a2a5ca9"],
+
+Cell[BoxData["\<\"Matrice randomica A: \"\>"], "Print",
+ CellChangeTimes->{3.8922714588683243`*^9},
+ CellLabel->"",ExpressionUUID->"230cc7fe-f7c2-411f-a3ca-8ff7b624f7e3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"7", ",", "10", ",", "8"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "8", ",", "0"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.892271458871697*^9},
+ CellLabel->"",ExpressionUUID->"cd1a92b1-5021-45a6-9d28-3dd7928cdc82"],
+
+Cell[BoxData["\<\"Matrice randomica B: \"\>"], "Print",
+ CellChangeTimes->{3.892271458875942*^9},
+ CellLabel->"",ExpressionUUID->"6b2a2cba-d2d4-4706-a078-c50351816bf8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"9", ",", "10", ",", "9"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "2"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.8922714588814917`*^9},
+ CellLabel->"",ExpressionUUID->"31f97894-c970-4904-8c21-1b5b7260cdcd"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8922692067970257`*^9, 3.892269228379052*^9}, 
+   3.8922693793992767`*^9, 3.8922696998309717`*^9, {3.892269853647429*^9, 
+   3.892269866525861*^9}},ExpressionUUID->"54346679-bfed-41dc-984e-\
+dc411d95c4f0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"PROVA", " ", "1"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"matriceA", ",", "matriceB"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"randomMatrici", "[", 
+        RowBox[{"n_", ",", "m_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"seed", ",", "matriceA", ",", "matriceB"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"seed", "=", 
+           RowBox[{
+           "Input", "[", 
+            "\"\<Inserisci il valore del seed (compreso tra 0 e 10000): \>\"",
+             "]"}]}], ";", "\n", 
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"seed", "<", "0"}], "||", 
+             RowBox[{"seed", ">", "10000"}]}], ",", 
+            RowBox[{
+             RowBox[{"seed", "=", 
+              RowBox[{
+              "Input", "[", 
+               "\"\<Valore non valido. Inserisci un seed compreso tra 0 e \
+10000: \>\"", "]"}]}], ";"}]}], "]"}], ";", "\n", 
+          RowBox[{"SeedRandom", "[", "seed", "]"}], ";", "\n", 
+          RowBox[{"Print", "[", "\"\<Il seed \[EGrave]: \>\"", "]"}], ";", 
+          "\n", 
+          RowBox[{"Print", "[", "seed", "]"}], ";", "\n", 
+          RowBox[{"matriceA", "=", 
+           RowBox[{"RandomInteger", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "10"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"n", ",", "m"}], "}"}]}], "]"}]}], ";", "\n", 
+          RowBox[{"matriceB", "=", 
+           RowBox[{"RandomInteger", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "10"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"n", ",", "m"}], "}"}]}], "]"}]}], ";", "\n", 
+          RowBox[{"Print", "[", "\"\<Matrice randomica A: \>\"", "]"}], ";", 
+          "\n", 
+          RowBox[{"Print", "[", "matriceA", "]"}], ";", "\n", 
+          RowBox[{"Print", "[", "\"\<Matrice randomica B: \>\"", "]"}], ";", 
+          "\n", 
+          RowBox[{"Print", "[", "matriceB", "]"}], ";", "\n", 
+          RowBox[{"{", 
+           RowBox[{"matriceA", ",", "matriceB"}], "}"}]}]}], "]"}]}], ";", 
+      "\n", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Button", "[", 
+          RowBox[{"\"\<Genera Matrici\>\"", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"matrici", "=", 
+              RowBox[{"randomMatrici", "[", 
+               RowBox[{"3", ",", "3"}], "]"}]}], ";", "\n", 
+             RowBox[{"matriceA", "=", 
+              RowBox[{"matrici", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+             RowBox[{"matriceB", "=", 
+              RowBox[{"matrici", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "}"}]}], "]"}], ",", 
+         RowBox[{"Grid", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\<Matrice A:\>\"", ",", "\"\<Matrice B:\>\""}], "}"}],
+             ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Dynamic", "@", 
+               RowBox[{"Grid", "[", 
+                RowBox[{"matriceA", ",", 
+                 RowBox[{"Frame", "->", "All"}]}], "]"}]}], ",", 
+              RowBox[{"Dynamic", "@", 
+               RowBox[{"Grid", "[", 
+                RowBox[{"matriceB", ",", 
+                 RowBox[{"Frame", "->", "All"}]}], "]"}]}]}], "}"}]}], "}"}], 
+          "]"}]}], "}"}], "]"}]}]}], "]"}], "\n"}]}]], "Input",
+ CellChangeTimes->{{3.8922692067970257`*^9, 3.892269228379052*^9}, 
+   3.8922693793992767`*^9, 3.8922696998309717`*^9, {3.892269853647429*^9, 
+   3.892269889301817*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"52f36dcc-d8f9-4661-9dfc-a2658b66a8e4"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`matriceA$$ = {{8, 4, 5}, {4, 7, 4}, {0, 1, 
+  0}}, $CellContext`matriceB$$ = {{4, 3, 7}, {3, 0, 2}, {7, 8, 7}}}, 
+  TagBox[GridBox[{
+     {
+      ButtonBox["\<\"Genera Matrici\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>{$CellContext`matrici = $CellContext`randomMatrici[
+           3, 3]; $CellContext`matriceA$$ = 
+          Part[$CellContext`matrici, 1]; $CellContext`matriceB$$ = 
+          Part[$CellContext`matrici, 2]; Null},
+       Evaluator->Automatic,
+       Method->"Preemptive"]},
+     {
+      TagBox[GridBox[{
+         {"\<\"Matrice A:\"\>", "\<\"Matrice B:\"\>"},
+         {
+          DynamicBox[ToBoxes[
+            Grid[$CellContext`matriceA$$, Frame -> All], StandardForm],
+           ImageSizeCache->{44., {25.134033203125, 30.865966796875}}], 
+          DynamicBox[ToBoxes[
+            Grid[$CellContext`matriceB$$, Frame -> All], StandardForm],
+           ImageSizeCache->{44., {26., 31.}}]}
+        },
+        AutoDelete->False,
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"],
+  DynamicModuleValues:>{}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{{3.892269890415577*^9, 
+  3.8922699045821238`*^9}},ExpressionUUID->"495656f4-eccc-4196-afae-\
+2b79bf67d836"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Il seed \[EGrave]: \"\>"], "Print",
+ CellChangeTimes->{3.892269892996847*^9},
+ CellLabel->"",ExpressionUUID->"50420cf6-377c-4e69-b9c5-5621edc60cbd"],
+
+Cell[BoxData["$Failed"], "Print",
+ CellChangeTimes->{3.892269893002877*^9},
+ CellLabel->"",ExpressionUUID->"dae357ff-bf4c-4c66-a4d2-a6c210fdf2d0"],
+
+Cell[BoxData["\<\"Matrice randomica A: \"\>"], "Print",
+ CellChangeTimes->{3.89226989300909*^9},
+ CellLabel->"",ExpressionUUID->"5fb6dfb2-d0f2-4fd2-a9dd-0d54ce0f90ee"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"8", ",", "4", ",", "5"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "7", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.892269893013192*^9},
+ CellLabel->"",ExpressionUUID->"259863fc-e124-4f30-b0cd-52f76a0042e7"],
+
+Cell[BoxData["\<\"Matrice randomica B: \"\>"], "Print",
+ CellChangeTimes->{3.892269893017023*^9},
+ CellLabel->"",ExpressionUUID->"84577506-defc-4bc5-949b-e024d9b83bc3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"4", ",", "3", ",", "7"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "0", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "8", ",", "7"}], "}"}]}], "}"}]], "Print",
+ CellChangeTimes->{3.89226989302248*^9},
+ CellLabel->"",ExpressionUUID->"21240c7e-9940-4135-a0c1-c5f0c92173b9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"PROVA", " ", "2"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"DynamicModule", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"s", "=", "0"}], "}"}], ",", 
+     RowBox[{"Column", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"InputField", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "[", "s", "]"}], ",", "Number", ",", 
+          RowBox[{
+          "FieldHint", "->", 
+           "\"\<Inserisci il valore del seed (compreso tra 0 e 10000): \
+\>\""}]}], "]"}], ",", 
+        RowBox[{"Button", "[", 
+         RowBox[{"\"\<Genera Matrici\>\"", ",", 
+          RowBox[{"Module", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"seed", ",", "matriceA", ",", "matriceB"}], "}"}], ",", 
+            RowBox[{
+             RowBox[{"seed", "=", 
+              RowBox[{"Round", "[", "s", "]"}]}], ";", "\n", 
+             RowBox[{"While", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"seed", "<", "0"}], "||", 
+                RowBox[{"seed", ">", "10000"}]}], ",", 
+               RowBox[{
+                RowBox[{"seed", "=", 
+                 RowBox[{
+                 "Input", "[", 
+                  "\"\<Valore non valido. Inserisci un seed compreso tra 0 e \
+10000: \>\"", "]"}]}], ";"}]}], "]"}], ";", "\n", 
+             RowBox[{"SeedRandom", "[", "seed", "]"}], ";", "\n", 
+             RowBox[{"Print", "[", "\"\<Il seed \[EGrave]: \>\"", "]"}], ";", 
+             "\n", 
+             RowBox[{"Print", "[", "seed", "]"}], ";", "\n", 
+             RowBox[{"matriceA", "=", 
+              RowBox[{"RandomInteger", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "10"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"n", ",", "m"}], "}"}]}], "]"}]}], ";", "\n", 
+             RowBox[{"matriceB", "=", 
+              RowBox[{"RandomInteger", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "10"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"n", ",", "m"}], "}"}]}], "]"}]}], ";", "\n", 
+             RowBox[{"Print", "[", "\"\<Matrice randomica A: \>\"", "]"}], 
+             ";", "\n", 
+             RowBox[{"Print", "[", "matriceA", "]"}], ";", "\n", 
+             RowBox[{
+             "Print", "[", "\"\<Stampa griglia della matrice A: \>\"", "]"}], 
+             ";", "\n", 
+             RowBox[{"Grid", "[", 
+              RowBox[{"matriceA", ",", 
+               RowBox[{"Frame", "->", "All"}]}], "]"}], ";", "\n", 
+             RowBox[{"Print", "[", "\"\<Matrice randomica B: \>\"", "]"}], 
+             ";", "\n", 
+             RowBox[{"Print", "[", "matriceB", "]"}], ";", "\n", 
+             RowBox[{
+             "Print", "[", "\"\<Stampa griglia della matrice B: \>\"", "]"}], 
+             ";", "\n", 
+             RowBox[{"Grid", "[", 
+              RowBox[{"matriceB", ",", 
+               RowBox[{"Frame", "->", "All"}]}], "]"}], ";", "\n", 
+             RowBox[{"{", 
+              RowBox[{"matriceA", ",", "matriceB"}], "}"}]}]}], "]"}]}], 
+         "]"}]}], "}"}], "]"}]}], "]"}], "\n", "\n"}]}]], "Input",
+ CellChangeTimes->{{3.8922692067970257`*^9, 3.892269228379052*^9}, 
+   3.8922693793992767`*^9, 3.8922696998309717`*^9, {3.892269853647429*^9, 
+   3.892269887212335*^9}},ExpressionUUID->"ad6847fb-6224-41cc-b7f2-\
+6b9eab40517f"],
+
+Cell[BoxData[
+ DynamicModuleBox[{$CellContext`s$$ = 2}, 
+  TagBox[GridBox[{
+     {
+      InputFieldBox[Dynamic[$CellContext`s$$], Number,
+       FieldHint->
+        "Inserisci il valore del seed (compreso tra 0 e 10000): "]},
+     {
+      ButtonBox["\<\"Genera Matrici\"\>",
+       Appearance->Automatic,
+       ButtonFunction:>
+        Module[{$CellContext`seed$, $CellContext`matriceA$, \
+$CellContext`matriceB$}, $CellContext`seed$ = Round[$CellContext`s$$]; While[
+           
+           Or[$CellContext`seed$ < 0, $CellContext`seed$ > 
+            10000], $CellContext`seed$ = 
+            Input["Valore non valido. Inserisci un seed compreso tra 0 e \
+10000: "]; Null]; SeedRandom[$CellContext`seed$]; 
+         Print["Il seed \[EGrave]: "]; 
+         Print[$CellContext`seed$]; $CellContext`matriceA$ = 
+          RandomInteger[{0, 
+            10}, {$CellContext`n, $CellContext`m}]; $CellContext`matriceB$ = 
+          RandomInteger[{0, 10}, {$CellContext`n, $CellContext`m}]; 
+         Print["Matrice randomica A: "]; Print[$CellContext`matriceA$]; 
+         Print["Stampa griglia della matrice A: "]; 
+         Grid[$CellContext`matriceA$, Frame -> All]; 
+         Print["Matrice randomica B: "]; Print[$CellContext`matriceB$]; 
+         Print["Stampa griglia della matrice B: "]; 
+         Grid[$CellContext`matriceB$, Frame -> 
+           All]; {$CellContext`matriceA$, $CellContext`matriceB$}],
+       Evaluator->Automatic,
+       Method->"Preemptive"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"],
+  DynamicModuleValues:>{}]], "Output",
+ CellChangeTimes->{3.892269380517613*^9, 3.892269700987019*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"01b5580e-456e-41d2-87c7-81426b2bd2e9"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[TextData[StyleBox["IV. Bibliografia e Sitografia", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+   3.89166882762542*^9, 3.891668854694463*^9}, {3.891668935771819*^9, 
+   3.891668937379916*^9}, {3.891668985842327*^9, 3.8916689924663677`*^9}, {
+   3.891669432660955*^9, 3.891669451304955*^9}, {3.89166953494608*^9, 
+   3.891669593586417*^9}, 
+   3.891669687348269*^9},ExpressionUUID->"0679195a-c1ae-420f-a4fe-\
+d15c49878f15"],
+
+Cell[TextData[StyleBox["V. Commenti e lavoro futuro", "Section",
+ FontSize->18]], "Section",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+   3.89166882762542*^9, 3.891668854694463*^9}, {3.891668935771819*^9, 
+   3.891668937379916*^9}, {3.891668985842327*^9, 3.8916689924663677`*^9}, {
+   3.891669432660955*^9, 3.891669451304955*^9}, {3.89166953494608*^9, 
+   3.891669593586417*^9}, 
+   3.891669696975851*^9},ExpressionUUID->"d84c0aa3-dd1b-4d3f-9c18-\
+603a75ce88bc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["",
+ FontSize->18]], "Title",
+ CellChangeTimes->{{3.891667032721233*^9, 3.891667032726952*^9}, {
+   3.891667129246235*^9, 3.8916671337984447`*^9}, {3.8916672300348063`*^9, 
+   3.89166729477108*^9}, {3.891667730716505*^9, 3.8916677541523123`*^9}, {
+   3.89166882762542*^9, 3.891668854694463*^9}, {3.891668935771819*^9, 
+   3.891668937379916*^9}, 3.891668985842327*^9, {3.891669560330523*^9, 
+   3.891669580722991*^9}, {3.89166970695857*^9, 
+   3.8916697153055573`*^9}},ExpressionUUID->"5303e3d9-9cab-4c5f-b3a2-\
+c19a4e646ed8"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.892020154868383*^9},ExpressionUUID->"da518c36-c1de-4eb4-b878-\
+cd807086dcef"]
+}, Open  ]]
+},
+WindowSize->{1297, 791},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.2 for Mac OS X x86 (64-bit) (January 30, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"44d25b5e-238f-4dc8-ba7c-45679b10ccce"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 405, 5, 98, "Title",ExpressionUUID->"973ccd0d-f4b6-462c-b1de-6d7708371662"],
+Cell[988, 29, 468, 7, 53, "Subtitle",ExpressionUUID->"ef84f500-714b-4f07-9cf7-7ad55a77a95e"],
+Cell[1459, 38, 324, 4, 53, "Subtitle",ExpressionUUID->"84afdc46-600c-4f76-bef3-efef0fb441e1"],
+Cell[1786, 44, 590, 10, 77, "Subtitle",ExpressionUUID->"b8d17cd5-8009-4c20-bae3-6f6a3f0bc3e9"],
+Cell[2379, 56, 535, 7, 45, "Subtitle",ExpressionUUID->"572d47dd-601d-4b14-b1fb-5c891509a293"],
+Cell[CellGroupData[{
+Cell[2939, 67, 1835, 43, 94, "Input",ExpressionUUID->"eb07ad26-ae2a-4ea2-a7a3-e4cd9d790d51"],
+Cell[4777, 112, 12642, 303, 96, "Output",ExpressionUUID->"11ca27df-78d6-486e-be8e-5b80fce3fa59"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17456, 420, 546, 9, 54, "Section",ExpressionUUID->"4a3b73d1-239a-4cb7-93ae-6667c477d763"],
+Cell[18005, 431, 700, 11, 38, "Text",ExpressionUUID->"f0c1379c-92d8-46b1-8bdd-a93149e3bee1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18742, 447, 606, 9, 54, "Section",ExpressionUUID->"0d77f93c-9b31-4eee-9e57-04fcd7f8348f"],
+Cell[19351, 458, 663, 10, 75, "Subsection",ExpressionUUID->"01ac96df-c71c-49b6-8d63-f35004bcfb3e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20051, 473, 709, 11, 54, "Section",ExpressionUUID->"11265337-cb3d-4c77-8c08-5a911755c232"],
+Cell[20763, 486, 669, 10, 75, "Subsection",ExpressionUUID->"03fade31-e3b8-4824-a72e-52a73394783a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21469, 501, 739, 11, 54, "Section",ExpressionUUID->"23bb04d4-5b78-4a72-bac8-b4bd931c0b42"],
+Cell[22211, 514, 882, 18, 30, "Input",ExpressionUUID->"4740d4a1-2d90-4b50-a27a-3ff3d5530c31"],
+Cell[23096, 534, 2041, 41, 157, "Input",ExpressionUUID->"bbe65d03-c47f-4463-b528-9361b007b16c"],
+Cell[CellGroupData[{
+Cell[25162, 579, 1101, 25, 42, "Input",ExpressionUUID->"aecfa866-c4f7-4cb4-9c37-34251139a7c0"],
+Cell[26266, 606, 474, 9, 28, "Message",ExpressionUUID->"180149ae-477f-42a4-933b-ea66a616ff5d"],
+Cell[CellGroupData[{
+Cell[26765, 619, 168, 2, 24, "Print",ExpressionUUID->"6a3da9f1-4ba4-4546-bd4e-e48e74dc5a4b"],
+Cell[26936, 623, 150, 2, 24, "Print",ExpressionUUID->"3a9755c8-9180-4d84-aa6e-4f05e7c3e531"],
+Cell[27089, 627, 168, 2, 24, "Print",ExpressionUUID->"deac9916-e87c-4942-a7df-f2350e85ae5b"],
+Cell[27260, 631, 303, 8, 24, "Print",ExpressionUUID->"69b23c65-fbb8-4dfa-b57c-ad6f830b472b"],
+Cell[27566, 641, 168, 2, 24, "Print",ExpressionUUID->"d6a569bc-57a6-436c-88df-3dcd56d01d01"],
+Cell[27737, 645, 303, 8, 24, "Print",ExpressionUUID->"b04feec1-0af4-45d6-934f-a5f91b67fdfa"]
+}, Open  ]],
+Cell[28055, 656, 474, 9, 28, "Message",ExpressionUUID->"0c6bb4af-392b-4c71-81cb-dbfe0a23d5e9"],
+Cell[CellGroupData[{
+Cell[28554, 669, 166, 2, 24, "Print",ExpressionUUID->"287cc22a-3754-4b32-b575-664d751d4a38"],
+Cell[28723, 673, 148, 2, 24, "Print",ExpressionUUID->"3115d837-a150-4643-8f3a-0cc9ba7c7dde"],
+Cell[28874, 677, 167, 2, 24, "Print",ExpressionUUID->"fbea8f41-3d2f-4666-8b7e-1d861963c6eb"],
+Cell[29044, 681, 302, 8, 24, "Print",ExpressionUUID->"31de5231-380d-4edc-a930-2b233d480761"],
+Cell[29349, 691, 168, 2, 24, "Print",ExpressionUUID->"93ee2235-74eb-4312-bc35-864f602123ee"],
+Cell[29520, 695, 304, 8, 24, "Print",ExpressionUUID->"b5ea5405-5c82-4258-96da-497123d9df14"],
+Cell[29827, 705, 168, 2, 24, "Print",ExpressionUUID->"504d1c5c-55f0-4151-ab7d-7dfab310fdcc"],
+Cell[29998, 709, 140, 2, 24, "Print",ExpressionUUID->"53e52b36-7acf-4b0c-82b6-9e9b3a2a5ca9"],
+Cell[30141, 713, 170, 2, 24, "Print",ExpressionUUID->"230cc7fe-f7c2-411f-a3ca-8ff7b624f7e3"],
+Cell[30314, 717, 304, 8, 24, "Print",ExpressionUUID->"cd1a92b1-5021-45a6-9d28-3dd7928cdc82"],
+Cell[30621, 727, 168, 2, 24, "Print",ExpressionUUID->"6b2a2cba-d2d4-4706-a078-c50351816bf8"],
+Cell[30792, 731, 306, 8, 24, "Print",ExpressionUUID->"31f97894-c970-4904-8c21-1b5b7260cdcd"]
+}, Open  ]]
+}, Open  ]],
+Cell[31125, 743, 253, 4, 30, "Input",ExpressionUUID->"54346679-bfed-41dc-984e-dc411d95c4f0"],
+Cell[CellGroupData[{
+Cell[31403, 751, 3892, 97, 367, "Input",ExpressionUUID->"52f36dcc-d8f9-4661-9dfc-a2658b66a8e4"],
+Cell[35298, 850, 1511, 38, 127, "Output",ExpressionUUID->"495656f4-eccc-4196-afae-2b79bf67d836"],
+Cell[CellGroupData[{
+Cell[36834, 892, 166, 2, 24, "Print",ExpressionUUID->"50420cf6-377c-4e69-b9c5-5621edc60cbd"],
+Cell[37003, 896, 146, 2, 24, "Print",ExpressionUUID->"dae357ff-bf4c-4c66-a4d2-a6c210fdf2d0"],
+Cell[37152, 900, 167, 2, 24, "Print",ExpressionUUID->"5fb6dfb2-d0f2-4fd2-a9dd-0d54ce0f90ee"],
+Cell[37322, 904, 372, 10, 24, "Print",ExpressionUUID->"259863fc-e124-4f30-b0cd-52f76a0042e7"],
+Cell[37697, 916, 168, 2, 24, "Print",ExpressionUUID->"84577506-defc-4bc5-949b-e024d9b83bc3"],
+Cell[37868, 920, 371, 10, 24, "Print",ExpressionUUID->"21240c7e-9940-4135-a0c1-c5f0c92173b9"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38288, 936, 3441, 81, 451, "Input",ExpressionUUID->"ad6847fb-6224-41cc-b7f2-6b9eab40517f"],
+Cell[41732, 1019, 1826, 39, 77, "Output",ExpressionUUID->"01b5580e-456e-41d2-87c7-81426b2bd2e9"]
+}, Open  ]]
+}, Open  ]],
+Cell[43585, 1062, 640, 10, 54, "Section",ExpressionUUID->"0679195a-c1ae-420f-a4fe-d15c49878f15"],
+Cell[44228, 1074, 638, 10, 40, "Section",ExpressionUUID->"d84c0aa3-dd1b-4d3f-9c18-603a75ce88bc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44903, 1089, 548, 9, 63, "Title",ExpressionUUID->"5303e3d9-9cab-4c5f-b3a2-c19a4e646ed8"],
+Cell[45454, 1100, 147, 3, 52, "Input",ExpressionUUID->"da518c36-c1de-4eb4-b878-cd807086dcef"]
+}, Open  ]]
+}
+]
+*)
+
