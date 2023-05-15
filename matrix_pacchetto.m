@@ -150,7 +150,7 @@ manipulateMatrixProduct[] := DynamicModule[{
 					Spacer[50],
 					Button["Inizia", 
 						userTry=True,
-						ImageSize->50	
+						ImageSize->60	
 					],
 					Spacer[50],
 	                "Matrice A*B:",
@@ -189,6 +189,11 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 				                "Mostra il prossimo elemento",
 							    If[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 							        currentElement++
+							    ]
+							],
+							Button[
+				                "Torna indietro",
+							     If[currentElement > 0, currentElement--
 							    ]
 							]
 			            }]
@@ -259,6 +264,15 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 
 manipulateMatrixProduct[]
 EndPackage[]
+
+(*Ci sono dei bug sulla creazione delle matrici risultanti e sulla verifica del risultato,
+da aggiungere la storia dei colori se ce la faciamo,
+aggiungere come si fa lo svolgimento con una finestra pop up,
+Aggiungere imagesize-> 60 non 50 sul tasto Inizia,
+Non ho capito cosa faccia il tasto Inizia,
+ho aggiunto il pulsante torna indietro che torna indietro nella costruzione della matrice*)
+
+
 
 
 
