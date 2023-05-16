@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: Matrix *)
-(* :Context: NOME DEL PACCHETTO *)
+(* :Context: matrixpachetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
 (* :Summary: TO DO *)
 (* :Copyright: Matrix 2023 *)
