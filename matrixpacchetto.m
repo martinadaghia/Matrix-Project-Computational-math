@@ -1,28 +1,38 @@
 (* ::Package:: *)
 
-BeginPackage["Matrix`"]
+(* :Title: Matrix *)
+(* :Context: NOME DEL PACCHETTO *)
+(* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
+(* :Summary: TO DO *)
+(* :Copyright: Matrix 2023 *)
+(* :Package Version: 19 Maggio 2023 *)
+(* :Mathematica Version: 13.2.1.0 *)
+(* :Sources: biblio *)
+
+BeginPackage["matrixpachetto`"]
 
 
 manipulateMatrixProduct::usage = "La funzione pi\[UGrave] bella del mondo"
 
 
 manipulateMatrixProduct[] := DynamicModule[{
-	 rowsA = 3,
-     colA = 3,
-     rowsB = 3,
-     colB = 3,
-	 matriceA = ConstantArray[0, {3, 3}],
-     matriceB = ConstantArray[0, {3, 3}],
-     matriceAB = ConstantArray[0, {3, 3}],
-     inputUtente = ConstantArray["", {3, 3}],
-     currentElement = 0,
-     randomFill = False,
-     justUpdated = False,
-     showErrors = False,
-     userTry = False,
-     seed = ""
+		 rowsA = 3,
+	     colA = 3,
+	     rowsB = 3,
+	     colB = 3,
+		 matriceA = ConstantArray[0, {3, 3}],
+	     matriceB = ConstantArray[0, {3, 3}],
+	     matriceAB = ConstantArray[0, {3, 3}],
+	     inputUtente = ConstantArray["", {3, 3}],
+	     currentElement = 0,
+	     randomFill = False,
+	     justUpdated = False,
+	     showErrors = False,
+	     userTry = False,
+	     seed = ""
     },
     Manipulate[
+        If[!randomFill, userTry=False];
         If[randomFill && seed != "",
             SeedRandom[seed];
             If[!justUpdated,
