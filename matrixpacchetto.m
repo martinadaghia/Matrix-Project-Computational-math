@@ -2,7 +2,7 @@
 (* :Title: Matrix *)
 (* :Context: matrixpachetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
-(* :Summary: spiegazione e tutorial di un prodotto tra due matrici *)
+(* :Summary: implementazione del gioco didattico Matrix, con annessa la spiegazione del prodotto tra due matrici *)
 (* :Copyright: Matrix 2023 *)
 (* :Package Version: 19 Maggio 2023 *)
 (* :Mathematica Version: 13.2.1.0 *)
@@ -16,7 +16,7 @@ manipulateMatrixProduct::usage = " manipulateMatrixProduct[]
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
 	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro."
 	
-Begin[“`Private`”]
+Begin["`Private`"];
 
 
 manipulateMatrixProduct[] := DynamicModule[{
