@@ -99,6 +99,7 @@ manipulateMatrixProduct[] := DynamicModule[{
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],
                 Number, FieldSize -> {2, 1}, Alignment -> Center, Enabled -> !randomFill]
             }, Alignment->Center],
+            Spacer[30],
             Column[{
 	            Row[Spacer[10]{
 		            Row[{
@@ -109,11 +110,12 @@ manipulateMatrixProduct[] := DynamicModule[{
 			                        matriceA,
 			                        Table[
 			                            With[{i = i, j = j},
-			                            Dynamic@If[currentElement > -1 && i == Quotient[(currentElement - 1), colB] + 1, Print[Yellow], Print[White]];
 			                                InputField[Dynamic[matriceA[[i, j]]], 
 				                                Number, FieldSize -> {3, 1}, 
 				                                Alignment -> Center, 
-				                                Background-> Dynamic@If[currentElement > 0 && i == Quotient[(currentElement - 1), colB] + 1, Yellow, White],
+				                                Background-> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1 
+				                                    && i == Quotient[(currentElement - 1), colB] + 1, 
+				                                       Green, White],
 			                                    Appearance -> Dynamic@If[userTry, Frameless],
 				                                Enabled->Dynamic[Not[userTry]]
 			                                ]
@@ -140,7 +142,9 @@ manipulateMatrixProduct[] := DynamicModule[{
 			                                    Dynamic[matriceB[[i, j]]],  
 				                                Number, FieldSize -> {3, 1}, 
 				                                Alignment -> Center,
-				                                Background-> Dynamic@If[currentElement > 0 && j == Mod[(currentElement - 1), colB] + 1, Yellow, White],
+				                                Background-> Dynamic@If[currentElement > 0 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1
+				                                    && j == Mod[(currentElement - 1), colB] + 1, 
+				                                        Green, White],
 				                                Appearance -> Dynamic@If[userTry, Frameless],
 				                                Enabled -> Dynamic[Not[userTry]]
 				                            ]
@@ -202,12 +206,13 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 				                "Mostra il prossimo elemento",
 							    If[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 							        currentElement++
-							    ]
+							    ],
+								Enabled->userTry
 							],
 							Button[
 				                "Torna indietro",
-							     If[currentElement > 0, currentElement--
-							    ]
+							    If[currentElement > 0, currentElement--],
+								Enabled->userTry
 							]
 			            }]
 	                ]
@@ -218,12 +223,14 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 				Button["Verifica Risultato",
 					If[currentElement != Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 						showErrors = True;
-						currentElement=Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]];
-					]
+						currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1;
+					],
+					Enabled->userTry
 				],
 				Spacer[10], 
 				Button["Mostra Soluzione", 
-					currentElement=Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]];
+					currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
+					Enabled->userTry
 				],
 				Spacer[10],
 				Button["Reset",
