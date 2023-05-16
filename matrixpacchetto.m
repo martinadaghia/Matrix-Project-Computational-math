@@ -10,7 +10,8 @@
 
 BeginPackage["matrixpachetto`"]
 
-manipulateMatrixProduct::usage = "Funzione che permette di creare l'interfaccia. Essa contiene diverse funzionalità, ovvero  
+manipulateMatrixProduct::usage = " manipulateMatrixProduct[] 
+	Funzione che permette di creare l'interfaccia. Essa contiene diverse funzionalità, ovvero  
 	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
 	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro."
