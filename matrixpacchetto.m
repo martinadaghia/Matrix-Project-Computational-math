@@ -1,9 +1,8 @@
-(* ::Package:: *)
 
 (* :Title: Matrix *)
 (* :Context: matrixpachetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
-(* :Summary: TO DO *)
+(* :Summary: spiegazione e tutorial di un prodotto tra due matrici *)
 (* :Copyright: Matrix 2023 *)
 (* :Package Version: 19 Maggio 2023 *)
 (* :Mathematica Version: 13.2.1.0 *)
@@ -11,8 +10,12 @@
 
 BeginPackage["matrixpachetto`"]
 
-
-manipulateMatrixProduct::usage = "La funzione pi\[UGrave] bella del mondo"
+manipulateMatrixProduct::usage = "Funzione che permette di creare l'interfaccia. Essa contiene diverse funzionalità, ovvero  
+	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
+	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
+	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro."
+	
+Begin[“`Private`”]
 
 
 manipulateMatrixProduct[] := DynamicModule[{
@@ -281,6 +284,7 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 ]
 
 manipulateMatrixProduct[]
+End[]		
 EndPackage[]
 
 (*
