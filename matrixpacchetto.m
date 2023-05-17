@@ -122,8 +122,12 @@ generaInterfaccia[]:= DynamicModule[{
 		                        Table[
 		                        (*Per ogni elemento (i,j ovvero per ogn rigaA e colonnaA) della matrice A creo un inputField con queste caratteristiche*)
 		                            With[{i = i, j = j},
-		                                InputField[Dynamic[matriceA[[i, j]]], 
-			                                Number, FieldSize -> {3, 1}, 
+		                                InputField[Dynamic[matriceA[[i, j]], 
+		                                If[!(-9999 <= # <= 9999), 
+		                                    MessageDialog["Il numero che hai inserito non \[EGrave] corretto. Inserire numeri da -9999 a 9999"], 
+		                                    matriceA[[i, j]] = #
+		                                ]&], 
+			                                Number, FieldSize -> {3, 1},
 			                                Alignment -> Center, 
 			                                (* Il background si attiva solamente quando siamo nella correzione della matrice AB.
 			                                Se l'indice in analisi \[EGrave] fra 1 e la cardinalit\[AGrave] di AB usiamo una formula per risalire alla riga che l'ha generato e la illuminiamo di verde*)
@@ -141,7 +145,7 @@ generaInterfaccia[]:= DynamicModule[{
 			            }, Alignment->Center
 			            ],    
 			        Spacer[20],
-			        Column[{"*"}]
+			        Column[{"\[CenterDot]"}]
 		            }],
 		            Row[{
 			            Column[{
@@ -150,7 +154,11 @@ generaInterfaccia[]:= DynamicModule[{
 		                        Table[
 		                            With[{i = i, j = j},
 		                                InputField[
-		                                    Dynamic[matriceB[[i, j]]],  
+		                                    Dynamic[matriceB[[i, j]], 
+			                                If[!(-9999 <= # <= 9999), 
+			                                    MessageDialog["Il numero che hai inserito non \[EGrave] corretto. Inserire numeri da -9999 a 9999"], 
+			                                    matriceB[[i, j]] = #
+			                                ]&],  
 			                                Number, FieldSize -> {3, 1}, 
 			                                Alignment -> Center,
 			                                Background-> Dynamic@If[currentElement > 0 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1
@@ -166,7 +174,7 @@ generaInterfaccia[]:= DynamicModule[{
 			                ]
 			            }, Alignment->Center], 
 			            Spacer[20],
-			            Column[{"="}]	   
+			            Column[{Style["=", Bold]}]	   
 		            }]        
 	            }],
 				Dynamic@Column[{
@@ -179,110 +187,126 @@ generaInterfaccia[]:= DynamicModule[{
 							    inputUtente = ConstantArray["", {Dimensions[matriceAB][[1]], Dimensions[matriceAB][[2]]}];
 								userTry=True
 							],
-							ImageSize->60,
+							BaseStyle->{FontSize->30},
 							Enabled -> !userTry
 						],
 						Invisible[""] (*quando le matrici sono generate randomicamente l'utente potr\[AGrave] solamente iniziare l'esercizio senza cliccare il bottone "Inizia"*)
 					]
 					,
 					Spacer[50],
-	                "Matrice A*B:",
-	                If[colA != rowsB,
-		                Framed[Text[Style["Le colonne di A e le righe di B devono avere 
-dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontColor->Red]], Background->LightGray],
-						Column[{Dynamic@Grid[
-		                    Table[
-		                    
-		                    (*Mostramo la matrice AB*)
-						        With[{i = i, j = j, indice = (i - 1) * Dimensions[matriceAB][[2]] + j},
-						        
-						        (*Se stiamo generando l'elemento indice che \[EGrave] prima dell'ultimo elemento di cui si \[EGrave] richiesta la correzione*)
-						            If[indice <= currentElement,
-						            
-						            (*Se siamo in fase di verifica degli errori commessi e l'elemento inserito dell'utente \[EGrave] sbagliato*)
-						                If[showErrors && matriceAB[[i, j]] != inputUtente[[i, j]],
-						                    (*ELEMENTO NON CORRETTO*)
-						                    
-						                    (*Se l'inputfield non era vuoto e era un numero *)
-							                If[!MissingQ[inputUtente[[i,j]]] && NumberQ[inputUtente[[i,j]]],
-							                    (*ERRORE DI CALCOLO COMMESSO*)
-							                    (*Mostriamo l'input dell'utente, --> con poi il valore corretto*)
-						                        Style[
-						                            ToString[inputUtente[[i,j]]]<> " ->"<> ToString[matriceAB[[i, j]]],
-						                            FontColor -> Red
-						                        ],
-							                    (*ELEMENTO NULLO*)
-								                Style[Dynamic[matriceAB[[i, j]]], FontColor -> Red]
-								                
+					Row[{
+					Column[{
+		                "Matrice A\[CenterDot]B:",
+		                If[colA != rowsB,
+			                Framed[Text[Style["Le colonne di A e le righe di B devono avere 
+	dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontColor->Red]], Background->LightGray],
+							Column[{Dynamic@Grid[
+			                    Table[
+			                    
+			                    (*Mostramo la matrice AB*)
+							        With[{i = i, j = j, indice = (i - 1) * Dimensions[matriceAB][[2]] + j},
+							        
+							        (*Se stiamo generando l'elemento indice che \[EGrave] prima dell'ultimo elemento di cui si \[EGrave] richiesta la correzione*)
+							            If[indice <= currentElement,
+							            
+							            (*Se siamo in fase di verifica degli errori commessi e l'elemento inserito dell'utente \[EGrave] sbagliato*)
+							                If[showErrors && matriceAB[[i, j]] != inputUtente[[i, j]],
+							                    (*ELEMENTO NON CORRETTO*)
+							                    
+							                    (*Se l'inputfield non era vuoto e era un numero *)
+								                If[!MissingQ[inputUtente[[i,j]]] && NumberQ[inputUtente[[i,j]]],
+								                    (*ERRORE DI CALCOLO COMMESSO*)
+								                    (*Mostriamo l'input dell'utente, --> con poi il valore corretto*)
+							                        Style[
+							                            ToString[inputUtente[[i,j]]]<> " ->"<> ToString[matriceAB[[i, j]]],
+							                            FontColor -> Red
+							                        ],
+								                    (*ELEMENTO NULLO*)
+									                Style[Dynamic[matriceAB[[i, j]]], FontColor -> Red]
+									                
+							                    ],
+							                    
+							                    (*ELEMENTO INSERITO CORRETTO*)
+						                        Style[Dynamic[matriceAB[[i, j]]], 
+							                        Background -> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1 
+				                                    && indice == currentElement, 
+				                                       RGBColor[0, 255, 0, .2], White],
+				                                    FontColor -> RGBColor["#32aa52"] (*colore verde*)
+			                                    ]   
 						                    ],
-						                    
-						                    (*ELEMENTO INSERITO CORRETTO*)
-					                        Style[Dynamic[matriceAB[[i, j]]], 
-						                        Background -> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1 
-			                                    && indice == currentElement, 
-			                                       RGBColor[0, 255, 0, .2], White],
-			                                    FontColor -> RGBColor["#32aa52"] (*colore verde*)
-		                                    ]   
-					                    ],
-					                    (*Inputfield della matrice AB vuoto*)
-							            InputField[
-										    Dynamic[inputUtente[[i,j]]],
-										    Number, 
-										    FieldSize -> {Automatic, 2},
-										    Alignment -> Center,
-										    Enabled-> userTry,
-										    Appearance-> If[!userTry, Frameless], (*feedback visivo inputfield per quando l'utente non ha ancora premuto "inizia"*)
-				
-										    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
-											(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
-											FieldHint -> 
-											    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
-											    ToString[rowsA]<>
-											    "\)]\)"<>
-											    ToString[TraditionalForm[Subscript[a, i, k]]]<>
-											    "*"<>
-											    ToString[TraditionalForm[Subscript[b, k, j]]]
-											 ,
-										    ImageSize -> {Full, Automatic},
-										    BaseStyle -> Bold
- 										]
-						            ]
-						        ],
-						        {i, Dimensions[matriceAB][[1]]}, {j, Dimensions[matriceAB][[2]]}
-						    ],
-			                  Frame -> All, Spacings -> {1, 1}, ItemSize -> {10, 2}
-				            ], 
-				            Button[
-				                "Mostra il prossimo elemento",
-							    If[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
-							        currentElement++
+						                    (*Inputfield della matrice AB vuoto*)
+								            InputField[
+											    Dynamic[inputUtente[[i,j]]],
+											    Number, 
+											    FieldSize -> {Automatic, 2},
+											    Alignment -> Center,
+											    Enabled-> userTry,
+											    Appearance-> If[!userTry, Frameless], (*feedback visivo inputfield per quando l'utente non ha ancora premuto "inizia"*)
+					
+											    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
+												(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
+												FieldHint -> 
+												    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
+												    ToString[rowsA]<>
+												    "\)]\)"<>
+												    ToString[TraditionalForm[Subscript[a, i, k]]]<>
+												    "*"<>
+												    ToString[TraditionalForm[Subscript[b, k, j]]]
+												 ,
+											    ImageSize -> {Full, Automatic},
+											    BaseStyle -> Bold
+	 										]
+							            ]
+							        ],
+							        {i, Dimensions[matriceAB][[1]]}, {j, Dimensions[matriceAB][[2]]}
 							    ],
-								Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
-							],
-							Button[
-				                "Torna indietro",
-							    If[currentElement > 0, currentElement--],
-								Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
-							]
-			            }]
-	                ]
+				                Frame -> All, Spacings -> {1, 1}, ItemSize -> {10, 2}
+					            ]
+					          
+				            }, Alignment->Center]
+		                ]
+	                }, Alignment->Center],
+	                Spacer[80],
+	                Column[{
+					            Button[
+					                "Risolvi precedente",
+								    If[currentElement > 0, currentElement--],
+									Enabled->userTry && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
+									BaseStyle->{ FontSize->20}
+								],
+								Spacer[100],
+					            Button[
+					                "Risolvi successivo",
+								    If[currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
+								        currentElement++
+								    ],
+									Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
+									BaseStyle->{FontSize->20}
+								]
+							}, 
+							Alignment->Center],
+							Spacer[80]
+							
+	                }]
 		        }, Alignment->Center]
-            }, Alignment->Center]
-            ,
+            }, Alignment->Center],
+            Spacer[20],
 			Row[{
 				Button["Verifica Risultato",
 					If[currentElement != Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 						showErrors = True;
 						currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1;
 					],
-					Enabled->userTry
+					Enabled->userTry,
+					BaseStyle->{FontSize->20}
 				],
-				Spacer[10], 
+				Spacer[20], 
 				Button["Mostra Soluzione", 
 					currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
-					Enabled->userTry
+					Enabled->userTry,
+					BaseStyle->{FontSize->20}
 				],
-				Spacer[10],
+				Spacer[350],
 				Button["Pulisci",
 					userTry=False;
 					showErrors=False;
@@ -296,15 +320,18 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 					matriceA = ConstantArray[0,{rowsA,colA}];
 					matriceB = ConstantArray[0,{rowsB,colB}];
 					matriceAB = Dot[matriceA, matriceB];
-					inputUtente = ConstantArray["", {rowsA, colB}];
+					inputUtente = ConstantArray["", {rowsA, colB}],
+					BaseStyle->{FontSize->20}
 				]
-			}]
-		}],
+			}, Alignment->Center]
+		}, Alignment->Center],
 		Row[ Spacer[20]{
 			Row[{
 				(*Se l'esercizio \[EGrave] impostato per generare matrici random mostro il bottone per passare alla modalit\[AGrave] manuale e viceversa*)
 				Dynamic@If[randomFill, 
-					Button["Riempi manualmente", 	
+					Button["Riempi manualmente", 
+						matriceAB = ConstantArray[0, {rowsB, colA}];
+						inputUtente = ConstantArray["", {rowsB, colA}];
 						seed="";				
 						rowsA = 3; 
 						colA = 3; 
@@ -313,19 +340,21 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 						matriceA = ConstantArray[0,{rowsA,colA}];
 						matriceB = ConstantArray[0,{rowsB,colB}];
 						randomFill = False;
-						matriceAB = Dot[matriceA, matriceB];
-						userTry = False;
+						userTry = False,
+						BaseStyle->{FontSize->20}
 					], 
 					Button["Riempi randomicamente",
 						randomFill = True;
-						userTry = True;
+						userTry = True,
+						BaseStyle->{FontSize->20}
 					]
 				]
 			}],
+			Spacer[500],
 			(*Se siamo in modalit\[AGrave] random do la possibilit\[AGrave] di isnerire il seed e controllo che sia valido*)
 			Dynamic@If[randomFill,
 			    Column[{
-			        Text["Random Seed : " Green],
+			        Style[Text["Random Seed : " Green], FontSize->20],
 			        InputField[Dynamic[seed,
 			            If[IntegerQ[#] && # >= 1,
 			                seed = #,
@@ -337,12 +366,12 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 			                    ]
 			                ]
 			            ]&],
-			            Number, FieldSize -> {10, 1.5}
+			            Number, FieldSize -> {10, 2},  BaseStyle->{FontSize->30}
 			        ]
 			    }],
 			    Column[{
-			        Text["Random Seed : " Red],
-			        InputField[Dynamic@seed, Number, FieldSize -> {10, 1.5}, Enabled -> False]
+			        Style[Text["Random Seed : " Red], FontSize->20],
+			        InputField[Dynamic@seed, Number, FieldSize -> {10, 2}, Enabled -> False, BaseStyle->{FontSize->30}]
 			    }]
 			]
 		}],
@@ -358,14 +387,3 @@ End[]
 
 
 EndPackage[]
-
-
-(*
-	input <=9999 && Null = 0
-	mostra soluzione e mostra prossimo illuminano di verde i numeri, ok?
-	modifica di tutte le dimensioni => generare AB (pare fatto)
-*)
-(*
-da aggiungere la storia dei colori se ce la facciamo,
-aggiungere come si fa lo svolgimento con una finestra pop up
-*)
