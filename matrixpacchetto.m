@@ -373,11 +373,16 @@ End[]
 EndPackage[]
 
 (*
+<<<<<<< HEAD
 	input <=9999 && Null = 0
 	mostra soluzione e mostra prossimo illuminano di verde i numeri, ok?
 	modifica di tutte le dimensioni => generare AB (pare fatto)
 *)
 matrici[]
+=======
+da aggiungere la storia dei colori se ce la facciamo,
+aggiungere come si fa lo svolgimento con una finestra pop up,*)
+>>>>>>> 25d1f19155bcf3fba1aae8a4ce67b8966e6b48d5
 
 
 
