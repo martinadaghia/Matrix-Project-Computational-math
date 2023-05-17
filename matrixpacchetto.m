@@ -1,6 +1,7 @@
+(* ::Package:: *)
 
 (* :Title: Matrix *)
-(* :Context: matrixpachetto` *)
+(* :Context: matrixpacchetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
 (* :Summary: implementazione del gioco didattico Matrix, con annessa la spiegazione del prodotto tra due matrici *)
 (* :Copyright: Matrix 2023 *)
@@ -8,18 +9,18 @@
 (* :Mathematica Version: 13.2.1.0 *)
 (* :Sources: biblio *)
 
-BeginPackage["matrixpachetto`"]
+BeginPackage["matrixpacchetto`"]
 
-manipulateMatrixProduct::usage = " manipulateMatrixProduct[] 
-	Funzione che permette di creare l'interfaccia. Essa contiene diverse funzionalità, ovvero  
+
+matrici::usage = "matrici[] 
+	Funzione che permette di creare l'interfaccia. Essa contiene diverse funzionalit\[AGrave], ovvero  
 	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
-	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro."
+	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro.";
 	
 Begin["`Private`"];
 
-
-manipulateMatrixProduct[] := DynamicModule[{
+matrici[]:= DynamicModule[{
 		 rowsA = 3,
 	     colA = 3,
 	     rowsB = 3,
@@ -36,8 +37,31 @@ manipulateMatrixProduct[] := DynamicModule[{
 	     seed = ""
     },
     Manipulate[
-        If[!randomFill, userTry=False];
+       If[randomFill && seed!="",
+          SeedRandom[seed];
+          If[!justUpdated,
+            (*AB ha rowsA righe e colB colonne sse colA=rowsB*)
+                justUpdated = True;
+			    showErrors = False;
+				currentElement=0;
+                rowsA = RandomChoice[{2, 3, 4, 5}];
+                colA = RandomChoice[{2, 3, 4, 5}];
+                rowsB = colA;
+                colB = RandomChoice[{2, 3, 4, 5}]; 
+            ];
+            matriceA = RandomInteger[{-10, 10}, {rowsA, colA}];
+            matriceB = RandomInteger[{-10, 10}, {rowsB, colB}];
+            matriceAB = Dot[matriceA, matriceB];
+			inputUtente = ConstantArray["", {rowsA, colB}];
+            justUpdated = False;
+       ];
+         (*If[!randomFill, userTry=False];
+            Print["not rF"];*)
+        (*  
+       
         If[randomFill && seed != "",
+        
+            Print["rF and seed"];
             SeedRandom[seed];
             If[!justUpdated,
             (*AB ha rowsA righe e colB colonne sse colA=rowsB*)
@@ -55,20 +79,25 @@ manipulateMatrixProduct[] := DynamicModule[{
             justUpdated = False;
             ,
             If[!userTry,
+            Print["not uT"];
 	            seed="";
 	            justUpdated = False;
-	            rowsA=3;
+	            (*rowsA=3;
 	            colA=3;
 	            rowsB=3;
-	            colB=3;
+	            colB=3;*);
 	            matriceA = ConstantArray[0, {rowsA, colA}];
 	            matriceB = ConstantArray[0, {rowsB, colB}];
             ]
         ];
         If[userTry,
+            Print["uT"];
+            Print[matriceA];
+            Print[matriceB];
 	        matriceAB = Dot[matriceA, matriceB];
 	        inputUtente = ConstantArray["", {Dimensions[matriceAB][[1]], Dimensions[matriceAB][[2]]}];
         ];
+        *);
         Column[{
             Row[{"Dimensione Matrice A: ",
             (*
@@ -77,7 +106,10 @@ manipulateMatrixProduct[] := DynamicModule[{
 	            non funziona, lo stesso vale per il seed: InputField non accetta range
             *)
                 InputField[Dynamic[rowsA, 
-	                If[IntegerQ[#] && # 1 <= # <= 6 , rowsA = #, 
+	                If[IntegerQ[#] && # 1 <= # <= 6 , 
+	                rowsA = #; 
+	                matriceA = ConstantArray[0, {rowsA, colA}];
+	                userTry = False, 
 	                   If[StringMatchQ[ToString[#], "*.*"], 
 	                         MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
 	                MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&], 
@@ -85,7 +117,10 @@ manipulateMatrixProduct[] := DynamicModule[{
                 ],
                 " x ", 
                 InputField[Dynamic[colA,
-                If[IntegerQ[#] && # 1 <= # <= 6 , colA = #, 
+                If[IntegerQ[#] && # 1 <= # <= 6 , 
+                   colA = #; 
+                   matriceA = ConstantArray[0, {rowsA, colA}];
+                   userTry = False, 
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],
@@ -93,14 +128,20 @@ manipulateMatrixProduct[] := DynamicModule[{
             }],
             Row[{"Dimensione Matrice B: ",
                 InputField[Dynamic[rowsB, 
-                If[IntegerQ[#] && # 1 <= # <= 6 , rowsB = #, 
+                If[IntegerQ[#] && # 1 <= # <= 6 , 
+	               rowsB = #; 
+	               matriceB = ConstantArray[0, {rowsB, colB}];
+	               userTry = False, 
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],  
                 Number, FieldSize -> {2, 1}, Alignment -> Center, Enabled -> !randomFill],
                 " x ",
                 InputField[Dynamic[colB, 
-                If[IntegerQ[#] && # 1 <= # <= 6 , colB = #, 
+                If[IntegerQ[#] && # 1 <= # <= 6 , 
+	               colB = #;
+	               matriceB = ConstantArray[0, {rowsB, colB}];
+	               userTry = False, 
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],
@@ -164,8 +205,13 @@ manipulateMatrixProduct[] := DynamicModule[{
 					Spacer[50],
 					Dynamic@If[!randomFill, 
 						Button["Inizia", 
-							userTry=True,
-							ImageSize->60
+							If[colA == rowsB,
+								matriceAB = Dot[matriceA, matriceB];
+							    inputUtente = ConstantArray["", {Dimensions[matriceAB][[1]], Dimensions[matriceAB][[2]]}];
+								userTry=True
+							],
+							ImageSize->60,
+							Enabled -> !userTry
 						],
 						Invisible[placeholder]
 					]
@@ -180,21 +226,42 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 						        With[{i = i, j = j, indice = (i - 1) * Dimensions[matriceAB][[2]] + j},
 						            If[indice <= currentElement,
 						                If[showErrors && matriceAB[[i, j]] != inputUtente[[i, j]],
-							                If[!NumberQ[inputUtente[[i,j]]],
-							                (*FIXME: Inserendo degli spazi vuoti si rompe*)
-								                Style[Text[Dynamic[matriceAB[[i, j]]]], FontColor -> Red],
-						                        Style[Text[inputUtente[[i,j]] "->" Dynamic[matriceAB[[i, j]]]], FontColor -> Red]
+						                    (*Elemento non corretto*)
+						                    Print[inputUtente[[i,j]] ,"wrong", indice];
+							                If[!MissingQ[inputUtente[[i,j]]] && NumberQ[inputUtente[[i,j]]],
+							                    (*Errore di calcolo commesso*)
+						                        Style[
+						                            StringForm["`1` -> `2`", ToString[inputUtente[[i,j]]], ToString[matriceAB[[i, j]]]],
+						                            FontColor -> Red
+						                        ],
+							                    (*Elemento nullo*)
+								                Style[Dynamic[matriceAB[[i, j]]], FontColor -> Red]
+								                
 						                    ],
-						                        Style[Text[Dynamic[matriceAB[[i, j]]]]]   
+						                    (*Elemento inserito corretto*)
+					                        Style[Dynamic[matriceAB[[i, j]]], 
+						                        Background -> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1 
+			                                    && indice == currentElement, 
+			                                       RGBColor[0, 255, 0, .2], White],
+			                                    FontColor -> RGBColor["#32aa52"]
+		                                    ]   
 					                    ],
 							            InputField[
 										    Dynamic[inputUtente[[i,j]]],
 										    Number, (*Otherwise it breaks on check result with Number and " " as input*)
 										    FieldSize -> {Automatic, 2},
 										    Alignment -> Center,
+										    Enabled-> userTry,
+										    Appearance-> If[!userTry, Frameless], 
 										    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
-										    FieldHint -> StringTemplate["\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \(`1`\)]\) `2` * `3`"
-										    ][ToString[rowsA], ToString[StandardForm[Subscript[a, i, k]]], ToString[StandardForm[Subscript[b, k, j]]]],
+											FieldHint -> StringJoin[
+											    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \(",
+											    ToString[rowsA],
+											    "\)]\)",
+											    ToString[TraditionalForm[Subscript[a, HoldForm[i], HoldForm[k]]]],
+											    "*",
+											    ToString[TraditionalForm[Subscript[b, HoldForm[k], HoldForm[j]]]]
+											],
 										    ImageSize -> {Full, Automatic},
 										    BaseStyle -> Bold
  										]
@@ -209,12 +276,12 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 							    If[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 							        currentElement++
 							    ],
-								Enabled->userTry
+								Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
 							],
 							Button[
 				                "Torna indietro",
 							    If[currentElement > 0, currentElement--],
-								Enabled->userTry
+								Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
 							]
 			            }]
 	                ]
@@ -247,14 +314,32 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 					randomFill = False;
 					matriceA = ConstantArray[0,{rowsA,colA}];
 					matriceB = ConstantArray[0,{rowsB,colB}];
-					matriceAB = matriceA . matriceB;
+					matriceAB = Dot[matriceA, matriceB];
 					inputUtente = ConstantArray["", {rowsA, colB}];
 				]
 			}]
 		}],
 		Row[ Spacer[20]{
-			Control[{
-				{randomFill,False,"Riempi randomicamente"},{False,True}
+			Row[{
+				
+				Dynamic@If[randomFill, 
+					Button["Riempi manualmente", 	
+						seed="";				
+						rowsA = 3; 
+						colA = 3; 
+						rowsB = 3; 
+						colB = 3;
+						matriceA = ConstantArray[0,{rowsA,colA}];
+						matriceB = ConstantArray[0,{rowsB,colB}];
+						randomFill = False;
+						matriceAB = Dot[matriceA, matriceB];
+						userTry = False;
+					], 
+					Button["Riempi randomicamente",
+						randomFill = True;
+						userTry = True;
+					]
+				]
 			}],
 			Dynamic@If[randomFill,
 			    Column[{
@@ -263,7 +348,7 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 			            If[IntegerQ[#] && # >= 1,
 			                seed = #,
 			                If[StringMatchQ[ToString[#], "*-*"],
-			                    MessageDialog["Il carattere \"-\" non pu\[OGrave] essere inserito"],
+			                    MessageDialog["Il seed deve essere positivo."],
 			                    If[StringMatchQ[ToString[#], "*.*"],
 			                        MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"],
 			                        MessageDialog["Inserire un numero intero positivo maggiore o uguale a 1"]
@@ -284,177 +369,15 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 	]
 ]
 
-manipulateMatrixProduct[]
 End[]		
 EndPackage[]
 
 (*
-da aggiungere la storia dei colori se ce la facciamo,
-aggiungere come si fa lo svolgimento con una finestra pop up,
+	input <=9999 && Null = 0
+	mostra soluzione e mostra prossimo illuminano di verde i numeri, ok?
+	modifica di tutte le dimensioni => generare AB (pare fatto)
+*)
+matrici[]
 
 
 
-
-
-
-(* ::Output:: *)
-(*Manipulate[If[Matrix`randomFill && Matrix`seed$$ != "", *)
-(*    SeedRandom[Matrix`seed$$]; If[ !Matrix`justUpdated$$, *)
-(*      Matrix`justUpdated$$ = True; Matrix`showErrors$$ = False; *)
-(*       Matrix`currentElement$$ = 0; Matrix`rowsA$$ = *)
-(*        RandomChoice[{2, 3, 4, 5}]; Matrix`colA$$ = *)
-(*        RandomChoice[{2, 3, 4, 5}]; Matrix`rowsB$$ = Matrix`colA$$; *)
-(*       Matrix`colB$$ = RandomChoice[{2, 3, 4, 5}]; ]; *)
-(*     Matrix`matriceA$$ = RandomInteger[{-10, 10}, {Matrix`rowsA$$, *)
-(*        Matrix`colA$$}]; Matrix`matriceB$$ = RandomInteger[{-10, 10}, *)
-(*       {Matrix`rowsB$$, Matrix`colB$$}]; Matrix`userTry$$ = True; *)
-(*     Matrix`justUpdated$$ = False; , If[ !Matrix`userTry$$, *)
-(*     Matrix`seed$$ = ""; Matrix`justUpdated$$ = False; Matrix`rowsA$$ = 3; *)
-(*      Matrix`colA$$ = 3; Matrix`rowsB$$ = 3; Matrix`colB$$ = 3; *)
-(*      Matrix`matriceA$$ = ConstantArray[0, {Matrix`rowsA$$, Matrix`colA$$}]; *)
-(*      Matrix`matriceB$$ = ConstantArray[0, {Matrix`rowsB$$, *)
-(*         Matrix`colB$$}]; ]]; If[Matrix`userTry$$, *)
-(*    Matrix`matriceAB$$ = Matrix`matriceA$$ . Matrix`matriceB$$; *)
-(*     Matrix`inputUtente$$ = ConstantArray["", *)
-(*       {Dimensions[Matrix`matriceAB$$][[1]], Dimensions[Matrix`matriceAB$$][[*)
-(*         2]]}]; ]; Column[{Row[{"Dimensione Matrice A:", *)
-(*       InputField[Dynamic[Matrix`rowsA$$, If[IntegerQ[#1] && #1*1 <= #1 <= 6, *)
-(*           Matrix`rowsA$$ = #1, If[StringMatchQ[ToString[#1], "*.*"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero maggiore o uguale a 1 e senza virgola"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero intero positivo compreso tra 1 e 6"]]] & ], *)
-(*        Number, FieldSize -> {2, 1}, Alignment -> Center, *)
-(*        Enabled ->  !Matrix`randomFill], "x", InputField[*)
-(*        Dynamic[Matrix`colA$$, If[IntegerQ[#1] && #1*1 <= #1 <= 6, *)
-(*           Matrix`colA$$ = #1, If[StringMatchQ[ToString[#1], "*.*"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero maggiore o uguale a 1 e senza virgola"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero intero positivo compreso tra 1 e 6"]]] & ], *)
-(*        Number, FieldSize -> {2, 1}, Alignment -> Center, *)
-(*        Enabled ->  !Matrix`randomFill]}], *)
-(*     Row[{"Dimensione Matrice B:", InputField[Dynamic[Matrix`rowsB$$, *)
-(*         If[IntegerQ[#1] && #1*1 <= #1 <= 6, Matrix`rowsB$$ = #1, *)
-(*           If[StringMatchQ[ToString[#1], "*.*"], MessageDialog[*)
-(*             "Inserire un numero maggiore o uguale a 1 e senza virgola"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero intero positivo compreso tra 1 e 6"]]] & ], *)
-(*        Number, FieldSize -> {2, 1}, Alignment -> Center, *)
-(*        Enabled ->  !Matrix`randomFill], "x", InputField[*)
-(*        Dynamic[Matrix`colB$$, If[IntegerQ[#1] && #1*1 <= #1 <= 6, *)
-(*           Matrix`colB$$ = #1, If[StringMatchQ[ToString[#1], "*.*"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero maggiore o uguale a 1 e senza virgola"], *)
-(*            MessageDialog[*)
-(*             "Inserire un numero intero positivo compreso tra 1 e 6"]]] & ], *)
-(*        Number, FieldSize -> {2, 1}, Alignment -> Center, *)
-(*        Enabled ->  !Matrix`randomFill]}, Alignment -> Center], Spacer[30], *)
-(*     Column[{Row[Spacer[10]*{Row[{Column[{"Matrice A:", Dynamic[Grid[*)
-(*                Table[With[{Matrix`i$ = Matrix`i, Matrix`j$ = Matrix`j}, *)
-(*                  InputField[Dynamic[Matrix`matriceA$$[[Matrix`i$,*)
-(*                     Matrix`j$]]], Number, FieldSize -> {3, 1}, Alignment -> *)
-(*                    Center, Background -> Dynamic[If[*)
-(*                      Matrix`currentElement$$ > -1 && *)
-(*                       Matrix`currentElement$$ < Dimensions[*)
-(*                          Matrix`matriceAB$$][[1]]*Dimensions[*)
-(*                          Matrix`matriceAB$$][[2]] + 1 && Matrix`i$ == *)
-(*                        Quotient[Matrix`currentElement$$ - 1, *)
-(*                          Matrix`colB$$] + 1, RGBColor[0, 255, 0, 0.2], *)
-(*                      White]], Appearance -> Dynamic[If[Matrix`userTry$$ || *)
-(*                       Matrix`randomFill, Frameless]], Enabled -> Dynamic[*)
-(*                      !Matrix`userTry$$]]], {Matrix`i, Matrix`rowsA$$}, *)
-(*                 {Matrix`j, Matrix`colA$$}], Frame -> All, Spacings -> *)
-(*                 {1, 1}, ItemSize -> {3, 2}]]}, Alignment -> Center], *)
-(*            Spacer[20], Column[{"*"}]}], *)
-(*          Row[{Column[{"Matrice B:", Dynamic[Grid[Table[With[{Matrix`i$ = *)
-(*                    Matrix`i, Matrix`j$ = Matrix`j}, InputField[Dynamic[*)
-(*                    Matrix`matriceB$$[[Matrix`i$,Matrix`j$]]], Number, *)
-(*                   FieldSize -> {3, 1}, Alignment -> Center, Background -> *)
-(*                    Dynamic[If[Matrix`currentElement$$ > 0 && *)
-(*                       Matrix`currentElement$$ < Dimensions[*)
-(*                          Matrix`matriceAB$$][[1]]*Dimensions[*)
-(*                          Matrix`matriceAB$$][[2]] + 1 && Matrix`j$ == *)
-(*                        Mod[Matrix`currentElement$$ - 1, Matrix`colB$$] + 1, *)
-(*                      RGBColor[0, 255, 0, 0.2], White]], Appearance -> *)
-(*                    Dynamic[If[Matrix`userTry$$ || Matrix`randomFill, *)
-(*                      Frameless]], Enabled -> Dynamic[ !Matrix`userTry$$]]], *)
-(*                 {Matrix`i, Matrix`rowsB$$}, {Matrix`j, Matrix`colB$$}], *)
-(*                Frame -> All, Spacings -> {1, 1}, ItemSize -> {3, 2}]]}, *)
-(*             Alignment -> Center], Spacer[20], Column[{"="}]}]}], *)
-(*       Dynamic[Column[{Spacer[50], Dynamic[If[ !Matrix`randomFill, *)
-(*            Button["Inizia", Matrix`userTry$$ = True, ImageSize -> 60], *)
-(*            Invisible[Matrix`placeholder]]], Spacer[50], "Matrice A*B:", *)
-(*          If[Matrix`colA$$ != Matrix`rowsB$$, Framed[*)
-(*            Text[Style["Le colonne di A e le righe di B devono avere \*)
-(*\ndimensioni uguali per poter generare una matrice", TextAlignment -> Center, *)
-(*              FontColor -> Red]], Background -> LightGray], *)
-(*           Column[{Dynamic[Grid[Table[With[{Matrix`i$ = Matrix`i, Matrix`j$ = *)
-(*                   Matrix`j, Matrix`indice$ = (Matrix`i - 1)*Dimensions[*)
-(*                       Matrix`matriceAB$$][[2]] + Matrix`j}, *)
-(*                 If[Matrix`indice$ <= Matrix`currentElement$$, *)
-(*                  If[Matrix`showErrors$$ && Matrix`matriceAB$$[[Matrix`i$,*)
-(*                      Matrix`j$]] != Matrix`inputUtente$$[[Matrix`i$,*)
-(*                      Matrix`j$]], If[ !NumberQ[Matrix`inputUtente$$[[*)
-(*                       Matrix`i$,Matrix`j$]]], Style[Text[Dynamic[*)
-(*                       Matrix`matriceAB$$[[Matrix`i$,Matrix`j$]]]], *)
-(*                     FontColor -> Red], Style[Text[Matrix`inputUtente$$[[*)
-(*                        Matrix`i$,Matrix`j$]]*"->"*Dynamic[*)
-(*                        Matrix`matriceAB$$[[Matrix`i$,Matrix`j$]]]], *)
-(*                     FontColor -> Red]], Style[Text[Dynamic[*)
-(*                      Matrix`matriceAB$$[[Matrix`i$,Matrix`j$]]]]]], *)
-(*                  InputField[Dynamic[Matrix`inputUtente$$[[Matrix`i$,*)
-(*                     Matrix`j$]]], Number, FieldSize -> {Automatic, 2}, *)
-(*                   Alignment -> Center, DefaultBaseStyle -> *)
-(*                    {ShowStringCharacters -> False, *)
-(*                     Matrix`ShowStringCharactersStyle -> "Placeholder"}, *)
-(*                   FieldHint -> StringTemplate["\!\(\*SubsuperscriptBox[\(\[Sum]\)\*)
-(*, \(k = 1\), \(`1`\)]\) `2` * `3`"][ToString[Matrix`rowsA$$], ToString[*)
-(*                      StandardForm[Subscript[Matrix`a, Matrix`i$, *)
-(*                        Matrix`k]]], ToString[StandardForm[Subscript[*)
-(*                        Matrix`b, Matrix`k, Matrix`j$]]]], ImageSize -> *)
-(*                    {Full, Automatic}]]], {Matrix`i, Dimensions[*)
-(*                   Matrix`matriceAB$$][[1]]}, {Matrix`j, Dimensions[*)
-(*                   Matrix`matriceAB$$][[2]]}], Frame -> All, Spacings -> *)
-(*                {1, 1}, ItemSize -> {10, 2}]], Button[*)
-(*              "Mostra il prossimo elemento", If[Matrix`currentElement$$ < *)
-(*                Dimensions[Matrix`matriceAB$$][[1]]*Dimensions[*)
-(*                   Matrix`matriceAB$$][[2]], Matrix`currentElement$$++], *)
-(*              Enabled -> Matrix`userTry$$], Button["Torna indietro", *)
-(*              If[Matrix`currentElement$$ > 0, Matrix`currentElement$$--], *)
-(*              Enabled -> Matrix`userTry$$]}]]}, Alignment -> Center]]}, *)
-(*      Alignment -> Center], Row[{Button["Verifica Risultato", *)
-(*        If[Matrix`currentElement$$ != Dimensions[Matrix`matriceAB$$][[1]]**)
-(*           Dimensions[Matrix`matriceAB$$][[2]], Matrix`showErrors$$ = True; *)
-(*          Matrix`currentElement$$ = Dimensions[Matrix`matriceAB$$][[1]]**)
-(*             Dimensions[Matrix`matriceAB$$][[2]] + 1; ], *)
-(*        Enabled -> Matrix`userTry$$], Spacer[10], Button["Mostra Soluzione", *)
-(*        Matrix`currentElement$$ = Dimensions[Matrix`matriceAB$$][[1]]**)
-(*           Dimensions[Matrix`matriceAB$$][[2]] + 1, *)
-(*        Enabled -> Matrix`userTry$$], Spacer[10], Button["Reset", *)
-(*        Matrix`userTry$$ = False; Matrix`showErrors$$ = False; *)
-(*         Matrix`currentElement$$ = 0; Matrix`seed$$ = ""; Matrix`rowsA$$ = 3; *)
-(*         Matrix`colA$$ = 3; Matrix`rowsB$$ = 3; Matrix`colB$$ = 3; *)
-(*         Matrix`randomFill = False; Matrix`matriceA$$ = ConstantArray[0, *)
-(*           {Matrix`rowsA$$, Matrix`colA$$}]; Matrix`matriceB$$ = *)
-(*          ConstantArray[0, {Matrix`rowsB$$, Matrix`colB$$}]; *)
-(*         Matrix`matriceAB$$ = Matrix`matriceA$$ . Matrix`matriceB$$; *)
-(*         Matrix`inputUtente$$ = ConstantArray["", {Matrix`rowsA$$, *)
-(*            Matrix`colB$$}]; ]}]}], *)
-(*  {{Matrix`randomFill, False, "Riempi randomicamente"}, {False, True}, *)
-(*   ControlPlacement -> 1}, Row[{Manipulate`Place[1]*Spacer[20], *)
-(*    Dynamic[If[Matrix`randomFill, Column[{Text["Random Seed : "*Green], *)
-(*         InputField[Dynamic[Matrix`seed$$, If[IntegerQ[#1] && #1 >= 1, *)
-(*             Matrix`seed$$ = #1, If[StringMatchQ[ToString[#1], "*-*"], *)
-(*              MessageDialog["Il carattere \"-\" non pu\[OGrave] essere inserito"], *)
-(*              If[StringMatchQ[ToString[#1], "*.*"], MessageDialog[*)
-(*                "Inserire un numero maggiore o uguale a 1 e senza virgola"], *)
-(*               MessageDialog[*)
-(*                "Inserire un numero intero positivo maggiore o uguale a 1"]]]] \*)
-(*& ], Number, FieldSize -> {10, 1.5}]}], Column[{Text["Random Seed : "*Red], *)
-(*         InputField[Dynamic[Matrix`seed$$], Number, FieldSize -> {10, 1.5}, *)
-(*          Enabled -> False]}]]]*Spacer[20]}], *)
-(*  TrackedSymbols :> {Matrix`rowsA$$, Matrix`colA$$, Matrix`rowsB$$, *)
-(*    Matrix`colB$$, Matrix`randomFill, Matrix`seed$$, Matrix`inputUtente$$, *)
-(*    Matrix`showErrors$$, Matrix`userTry$$, Matrix`matriceA$$, *)
-(*    Matrix`matriceB$$}, SynchronousUpdating -> True]*)
