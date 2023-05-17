@@ -152,7 +152,7 @@ mamatrici[]:= DynamicModule[{
 		                                    Dynamic[matriceB[[i, j]]],  
 			                                Number, FieldSize -> {3, 1}, 
 			                                Alignment -> Center,
-			                                Background-> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1
+			                                Background-> Dynamic@If[currentElement > 0 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1
 			                                    && j == Mod[(currentElement - 1), colB] + 1, 
 			                                        RGBColor[0, 255, 0, .2], White],
 			                                Appearance -> Dynamic@If[userTry || randomFill, Frameless],
@@ -366,6 +366,7 @@ mamatrici[]
 da aggiungere la storia dei colori se ce la facciamo,
 aggiungere come si fa lo svolgimento con una finestra pop up
 *)
+
 
 
 
