@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* :Title: Matrix *)
+(* :Title: matrixpachetto *)
 (* :Context: matrixpacchetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
 (* :Summary: implementazione del gioco didattico Matrix, con annessa la spiegazione del prodotto tra due matrici *)
@@ -9,18 +9,19 @@
 (* :Mathematica Version: 13.2.1.0 *)
 (* :Sources: biblio *)
 
-BeginPackage["matrixpacchetto`"]
 
-
-mamatrici::usage = "matrici[] 
+BeginPackage["matrixpacchetto`"];
+generaInterfaccia::usage="generaInterfaccia [] 
 	Funzione che permette di creare un'interfaccia interattiva e dinamica. Essa contiene diverse funzionalit\[AGrave], ovvero  
 	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
 	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro.";
-	
-Begin["`Private`"];
 
-mamatrici[]:= DynamicModule[{
+
+Begin["`Private`"]
+
+
+generaInterfaccia[]:= DynamicModule[{
 		 rowsA = 3,
 	     colA = 3,
 	     rowsB = 3,
@@ -29,12 +30,12 @@ mamatrici[]:= DynamicModule[{
 		 matriceA = ConstantArray[0, {3, 3}], 
 	     matriceB = ConstantArray[0, {3, 3}],
 	     matriceAB = ConstantArray[0, {3, 3}],
-	     (*creiamo la matrice 3x3 con tutti valori vuoti*)
+	     (*creiamo la matrice 3x3 con tutti valori vuoti per contenere l'input utente*)
 	     inputUtente = ConstantArray["", {3, 3}],
-	     currentElement = 0, (*elemento della matrice AB in cui si effettua il calcolo del prodotto*)
+	     currentElement = 0, (*elemento della matrice input attualmente in verifica con AB*)
 	     randomFill = False, (*variabile bool che diventer\[AGrave] true se l'utente sceglie l'opzione random, se no rimarr\[AGrave] false*)
 	     justUpdated = False, (*variabile bool di controllo per sapere se le matrici random sono state generate oppure no*)
-	     showErrors = False, (*variabile bool di controllo per vedere se sono presenti errori o no sul bottone verifica risultato*)
+	     showErrors = False, (*variabile bool di controllo per attivare la visualizzazione di errori*)
 	     userTry = False, (*variabile bool di controllo per verificare se l'utente ha iniziato il suo tentativo oppure no*)
 	     seed = "" (*inizializziamo il valore del seed*)
     },
@@ -181,7 +182,7 @@ mamatrici[]:= DynamicModule[{
 							ImageSize->60,
 							Enabled -> !userTry
 						],
-						Invisible[placeholder] (*quando le matrici sono generate randomicamente l'utente potr\[AGrave] solamente iniziare l'esercizio senza cliccare il bottone "Inizia"*)
+						Invisible[""] (*quando le matrici sono generate randomicamente l'utente potr\[AGrave] solamente iniziare l'esercizio senza cliccare il bottone "Inizia"*)
 					]
 					,
 					Spacer[50],
@@ -205,10 +206,9 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 						                    (*Se l'inputfield non era vuoto e era un numero *)
 							                If[!MissingQ[inputUtente[[i,j]]] && NumberQ[inputUtente[[i,j]]],
 							                    (*ERRORE DI CALCOLO COMMESSO*)
-							               
 							                    (*Mostriamo l'input dell'utente, --> con poi il valore corretto*)
 						                        Style[
-						                            StringForm[ToString[inputUtente[[i,j]]], "->", ToString[matriceAB[[i, j]]]],
+						                            ToString[inputUtente[[i,j]]]<> " ->"<> ToString[matriceAB[[i, j]]],
 						                            FontColor -> Red
 						                        ],
 							                    (*ELEMENTO NULLO*)
@@ -235,14 +235,14 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 				
 										    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
 											(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
-											FieldHint -> StringJoin[
-											    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \(",
-											    ToString[rowsA],
-											    "\)]\)",
-											    ToString[TraditionalForm[Subscript[a, HoldForm[i], HoldForm[k]]]],
-											    "*",
-											    ToString[TraditionalForm[Subscript[b, HoldForm[k], HoldForm[j]]]]
-											],
+											FieldHint -> 
+											    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
+											    ToString[rowsA]<>
+											    "\)]\)"<>
+											    ToString[TraditionalForm[Subscript[a, i, k]]]<>
+											    "*"<>
+											    ToString[TraditionalForm[Subscript[b, k, j]]]
+											 ,
 										    ImageSize -> {Full, Automatic},
 										    BaseStyle -> Bold
  										]
@@ -353,22 +353,19 @@ dimensioni uguali per poter generare una matrice", TextAlignment->Center, FontCo
 	]
 ]
 
-End[]		
+
+End[]	
+
+
 EndPackage[]
+
 
 (*
 	input <=9999 && Null = 0
 	mostra soluzione e mostra prossimo illuminano di verde i numeri, ok?
 	modifica di tutte le dimensioni => generare AB (pare fatto)
 *)
-mamatrici[]
 (*
 da aggiungere la storia dei colori se ce la facciamo,
 aggiungere come si fa lo svolgimento con una finestra pop up
 *)
-
-
-
-
-
-
