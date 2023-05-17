@@ -290,7 +290,7 @@ EndPackage[]
 
 (*
 da aggiungere la storia dei colori se ce la facciamo,
-aggiungere come si fa lo svolgimento con una finestra pop up,
+aggiungere come si fa lo svolgimento con una finestra pop up,*)
 
 
 
