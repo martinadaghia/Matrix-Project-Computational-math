@@ -1,17 +1,21 @@
 (* ::Package:: *)
 
-(* :Title: matrixpachetto *)
+(* :Title: Matrix *)
 (* :Context: matrixpacchetto` *)
 (* :Author: Martina Daghia, Matrina Zauli, Riccardo Spini, Gabriele Fogu*)
 (* :Summary: implementazione del gioco didattico Matrix, con annessa la spiegazione del prodotto tra due matrici *)
 (* :Copyright: Matrix 2023 *)
-(* :Package Version: 19 Maggio 2023 *)
+(* :Package Version: 21 Maggio 2023 *)
 (* :Mathematica Version: 13.2.1.0 *)
 (* :Sources: biblio *)
 
 
+(*Definamo il nostro pacchetto*)
 BeginPackage["matrixpacchetto`"];
-GeneraInterfaccia::usage="GeneraInterfaccia [] 
+
+
+(*Definiamo la nostra funzione*)
+GeneraInterfaccia::usage="GeneraInterfaccia []
 	Funzione che permette di creare un'interfaccia interattiva e dinamica. Essa contiene diverse funzionalit\[AGrave], ovvero  
 	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
@@ -21,6 +25,7 @@ GeneraInterfaccia::usage="GeneraInterfaccia []
 Begin["`Private`"]
 
 
+(*Implementiamo la nostra funzione*)
 GeneraInterfaccia[]:= DynamicModule[{
 		 rowsA = 3,
 	     colA = 3,
@@ -70,12 +75,16 @@ GeneraInterfaccia[]:= DynamicModule[{
         (*Attraverso l'inputfield prendo le dimensioni delle matrici, effettuo dei controlli e aggiorno*)
             Row[{Style["Dimensione Matrice A: ", FontFamily -> "Helvetica"],
                 InputField[Dynamic[rowsA, 
+		(*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
+			se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
 	                If[IntegerQ[#] && 1 <= # <= 6 , 
-	                rowsA = #; 
-	                matriceA = ConstantArray[0, {rowsA, colA}];
+	                rowsA = #;  (*assegno il valore inserito dell'utente nella variabile righe di A*)
+	                matriceA = ConstantArray[0, {rowsA, colA}]; (*creo la matrice a con tutti valori 0 in base alle righe e le colonne*)
 	                userTry = False, (*resetta matrici se si verificano cambiamenti delle dimensioni*)
+			(*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
+				in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
 	                   If[StringMatchQ[ToString[#], "*.*"], 
-	                         MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
+	                         MessageDialog["Inserire un numero intero, le dimensioni delle matrici non possono avere numeri decimali con il punto.\n Ad esempio dimensioni come 2.1, 4.5 non sono accettate, ma sono accettate dimensioni come 2, 4, 3."], 
 	                MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&], 
 	                
 	                Number, FieldSize -> {4, 2}, Alignment -> Center, Enabled -> !randomFill, BaseStyle -> {FontFamily -> "Helvetica"}
@@ -123,6 +132,8 @@ GeneraInterfaccia[]:= DynamicModule[{
 		                        (*Per ogni elemento (i,j ovvero per ogn rigaA e colonnaA) della matrice A creo un inputField con queste caratteristiche*)
 		                            With[{i = i, j = j},
 		                                InputField[Dynamic[matriceA[[i, j]], 
+						(*I numeri che l'utente pu\[OGrave] inserire nelle matrici (A e B) devono stare dentro al range di -9999 e 9999,
+							nel caso il numero inserito non sia interno al range viene mostrato all'utente un messaggio di errore e riazzerata la casella.*)
 		                                If[!(-9999 <= # <= 9999), 
 		                                    MessageDialog["Il numero che hai inserito non \[EGrave] corretto. Inserire numeri da -9999 a 9999"], 
 		                                    matriceA[[i, j]] = #
@@ -181,9 +192,10 @@ GeneraInterfaccia[]:= DynamicModule[{
 				Dynamic@Column[{
 					Spacer[50],
 					Dynamic@If[!randomFill, 
+					(*Se le colonne della matrice A sono uguali alle righe della matrice B, allora \[EGrave] possibile fare il prodotto tra le due matrici*)
 						Button["Inizia", 
 							If[colA == rowsB,
-								matriceAB = Dot[matriceA, matriceB];
+								matriceAB = Dot[matriceA, matriceB]; (*prodotto tra matrice A e matrice B*)
 								(*Matrice che ci serve per memorizzare i valori inseriti dall'utente*)
 							    inputUtente = ConstantArray["", {Dimensions[matriceAB][[1]], Dimensions[matriceAB][[2]]}];
 								userTry=True
@@ -269,6 +281,9 @@ GeneraInterfaccia[]:= DynamicModule[{
 	                }, Alignment->Center],
 	                Spacer[80],
 	                Column[{
+			(*I bottoni risolvi precedente e risolvi successivo sono una "pseudo guida" per l'utente in cui si evidenziano le righe e le colonne delle matrici e la casellina corrispondente nella matrice AB in cui andr\[AGrave] inserito il calcolo.
+				Risolvi precedente ti consente di tornare indietro al passaggio precedente evidenziandoti il passo successivo, invece
+				Risolvi successivo ti permette di andare avanti e continuare la guida per l'utente illuminandoti le caselline delle matrici nel modo corretto.*)
 					            Button[
 					                "Risolvi precedente",
 								    If[currentElement > 0, currentElement--],
@@ -292,6 +307,15 @@ GeneraInterfaccia[]:= DynamicModule[{
             }, Alignment->Center],
             Spacer[20],
 			Row[{
+			(*Verifica risultato
+				verifica il risultato inserito dall'utente mostrando gli errori che ha effettuato in rosso e di fianco la correzione e mostrando le risposte corrette in verde.
+			  
+			  Mostra soluzione
+			  	Stampa la soluzione del prodotto tra le due matrici e colora i valori dentro alle celle di verde.
+			  
+			  Pulisci (=pulisci soluzione)
+			  	Resetta tutta l'interfaccia utente azzerando ogni casellina e ripristinandola.
+			*)
 				Dynamic@Button["Verifica Risultato",
 					If[currentElement != Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 						showErrors = True;
@@ -381,10 +405,9 @@ GeneraInterfaccia[]:= DynamicModule[{
 		SynchronousUpdating->True
 	]
 ]
-GeneraInterfaccia[]
 
 
-End[]	
+End[]
 
 
 EndPackage[]
