@@ -11,7 +11,7 @@
 
 
 BeginPackage["matrixpacchetto`"];
-generaInterfaccia::usage="generaInterfaccia [] 
+GeneraInterfaccia::usage="GeneraInterfaccia [] 
 	Funzione che permette di creare un'interfaccia interattiva e dinamica. Essa contiene diverse funzionalit\[AGrave], ovvero  
 	permette di creare un esercizio randomicamente, permette all'utente di inserire personalmente  valori. 
 	Inoltre, attraverso dei bottoni permette di iniziare il gioco, verificare il risultato inserito dall'utente,
@@ -21,7 +21,7 @@ generaInterfaccia::usage="generaInterfaccia []
 Begin["`Private`"]
 
 
-generaInterfaccia[]:= DynamicModule[{
+GeneraInterfaccia[]:= DynamicModule[{
 		 rowsA = 3,
 	     colA = 3,
 	     rowsB = 3,
@@ -286,25 +286,24 @@ generaInterfaccia[]:= DynamicModule[{
 								]
 							}, 
 							Alignment->Center],
-							Spacer[80]
-							
+							Spacer[80]	
 	                }]
 		        }, Alignment->Center]
             }, Alignment->Center],
             Spacer[20],
 			Row[{
-				Button["Verifica Risultato",
+				Dynamic@Button["Verifica Risultato",
 					If[currentElement != Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 						showErrors = True;
 						currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1;
 					],
-					Enabled->userTry,
+					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
 				Spacer[20], 
-				Button["Mostra Soluzione", 
+				Dynamic@Button["Mostra Soluzione", 
 					currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
-					Enabled->userTry,
+					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
 				Spacer[350],
@@ -330,16 +329,16 @@ generaInterfaccia[]:= DynamicModule[{
 			Row[{
 				(*Se l'esercizio \[EGrave] impostato per generare matrici random mostro il bottone per passare alla modalit\[AGrave] manuale e viceversa*)
 				Dynamic@If[randomFill, 
-					Button["Riempi manualmente", 
-						matriceAB = ConstantArray[0, {rowsB, colA}];
-						inputUtente = ConstantArray["", {rowsB, colA}];
-						seed="";				
+					Button["Riempi manualmente", 			
 						rowsA = 3; 
 						colA = 3; 
 						rowsB = 3; 
 						colB = 3;
-						matriceA = ConstantArray[0,{rowsA,colA}];
-						matriceB = ConstantArray[0,{rowsB,colB}];
+						matriceAB = ConstantArray[0, {rowsB, colA}];
+						inputUtente = ConstantArray["", {rowsB, colA}];
+						seed="";	
+						matriceA = ConstantArray[0,{rowsA, colA}];
+						matriceB = ConstantArray[0,{rowsB, colB}];
 						randomFill = False;
 						userTry = False,
 						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
@@ -382,6 +381,7 @@ generaInterfaccia[]:= DynamicModule[{
 		SynchronousUpdating->True
 	]
 ]
+GeneraInterfaccia[]
 
 
 End[]	
