@@ -285,20 +285,20 @@ GeneraInterfaccia[]:= DynamicModule[{
 				Risolvi precedente ti consente di tornare indietro al passaggio precedente evidenziandoti il passo successivo, invece
 				Risolvi successivo ti permette di andare avanti e continuare la guida per l'utente illuminandoti le caselline delle matrici nel modo corretto.*)
 					            Button[
-					                "Risolvi precedente",
-								    If[currentElement > 0, currentElement--],
-									Enabled->userTry && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
-									BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
-								],
-								Spacer[100],
-					            Button[
 					                "Risolvi successivo",
 								    If[currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
 								        currentElement++
 								    ],
 									Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 									BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
-								]
+								],
+					            Spacer[100],
+					            Button[
+					                "Risolvi precedente",
+								    If[currentElement > 0, currentElement--],
+									Enabled->userTry && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
+									BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+								] 
 							}, 
 							Alignment->Center],
 							Spacer[80]	
@@ -365,12 +365,14 @@ GeneraInterfaccia[]:= DynamicModule[{
 						matriceB = ConstantArray[0,{rowsB, colB}];
 						randomFill = False;
 						userTry = False,
-						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+						BaseStyle->{FontFamily -> "Helvetica", FontSize->30},
+						Enabled-> currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
 					], 
 					Button["Riempi randomicamente",
 						randomFill = True;
 						userTry = True,
-						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+						BaseStyle->{FontFamily -> "Helvetica", FontSize->30},
+						Enabled-> currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]] (*WUAAAA*)
 					]
 				]
 			}],
@@ -401,7 +403,10 @@ GeneraInterfaccia[]:= DynamicModule[{
 		}],
 		(*Variabili che scatenano l'aggiornamento dell'interfaccia dinamica quando vengono modificati*)
 		TrackedSymbols:>{rowsA, colA, rowsB, colB, randomFill, seed, inputUtente, showErrors, userTry, matriceA, matriceB},
-		(*Aggiornamento sincrono*)
+		(*Aggiornamento sincrono
+		
+		currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
+		*)
 		SynchronousUpdating->True
 	]
 ]
