@@ -138,7 +138,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 		                                    MessageDialog["Il numero che hai inserito non \[EGrave] corretto. Inserire numeri da -9999 a 9999"], 
 		                                    matriceA[[i, j]] = #
 		                                ]&], 
-			                                Number, FieldSize -> {3, 1},
+			                                Number, FieldSize -> {5, 2},
 			                                Alignment -> Center, 
 			                                (* Il background si attiva solamente quando siamo nella correzione della matrice AB.
 			                                Se l'indice in analisi \[EGrave] fra 1 e la cardinalit\[AGrave] di AB usiamo una formula per risalire alla riga che l'ha generato e la illuminiamo di verde*)
@@ -168,9 +168,9 @@ GeneraInterfaccia[]:= DynamicModule[{
 		                                    Dynamic[matriceB[[i, j]], 
 			                                If[!(-9999 <= # <= 9999), 
 			                                    MessageDialog["Il numero che hai inserito non \[EGrave] corretto. Inserire numeri da -9999 a 9999"], 
-			                                    matriceB[[i, j]] = 0
+			                                    matriceB[[i, j]] = #
 			                                ]&],  
-			                                Number, FieldSize -> {3, 1}, 
+			                                Number, FieldSize -> {5, 2}, 
 			                                Alignment -> Center,
 			                                Background-> Dynamic@If[currentElement > 0 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1
 			                                    && j == Mod[(currentElement - 1), colB] + 1, 
@@ -185,7 +185,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 			                ]
 			            }, Alignment->Center], 
 			            Spacer[20],
-			            Column[{Style["=", Bold, FontFamily -> "Helvetica"]}]	
+			            Column[{Style["=", FontFamily -> "Helvetica"]}]	
    
 		            }]        
 	            }],
@@ -251,7 +251,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 								            InputField[
 											    Dynamic[inputUtente[[i,j]]],
 											    Number, 
-											    FieldSize -> {Automatic, 2},
+											    FieldSize -> {Automatic, 3},
 											    Alignment -> Center,
 											    Enabled-> userTry,
 											    Appearance-> If[!userTry, Frameless], (*feedback visivo inputfield per quando l'utente non ha ancora premuto "inizia"*)
@@ -365,12 +365,14 @@ GeneraInterfaccia[]:= DynamicModule[{
 						matriceB = ConstantArray[0,{rowsB, colB}];
 						randomFill = False;
 						userTry = False,
+						ImageSize->500,
 						BaseStyle->{FontFamily -> "Helvetica", FontSize->30},
 						Enabled-> currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
 					], 
 					Button["Riempi randomicamente",
 						randomFill = True;
 						userTry = True,
+						ImageSize->500,
 						BaseStyle->{FontFamily -> "Helvetica", FontSize->30},
 						Enabled-> currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]] (*WUAAAA*)
 					]
@@ -392,12 +394,12 @@ GeneraInterfaccia[]:= DynamicModule[{
 			                    ]
 			                ]
 			            ]&],
-			            Number, FieldSize -> {10, 2},  BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+			            Number, FieldSize -> {16, 2},  BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 			        ]
 			    }],
 			    Column[{
 			        Style[Text["Random Seed : " Red], FontFamily -> "Helvetica", FontSize->30],
-			        InputField[Dynamic@seed, Number, FieldSize -> {10, 2}, Enabled -> False, BaseStyle->{FontFamily -> "Helvetica", FontSize->30}]
+			        InputField[Dynamic@seed, Number, FieldSize -> {16, 2}, Enabled -> False, BaseStyle->{FontFamily -> "Helvetica", FontSize->30}]
 			    }]
 			]
 		}],
