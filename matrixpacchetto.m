@@ -231,12 +231,33 @@ GeneraInterfaccia[]:= DynamicModule[{
 								                    (*ERRORE DI CALCOLO COMMESSO*)
 								                    (*Mostriamo l'input dell'utente, --> con poi il valore corretto*)
 							                        Style[
-							                            ToString[inputUtente[[i,j]]]<> " ->"<> ToString[matriceAB[[i, j]]],
+							                            (*ToString[inputUtente[[i,j]]]<> " ->"<> ToString[matriceAB[[i, j]]],*)
+							                            ToString[inputUtente[[i,j]]],
 							                            FontColor -> Red
 							                        ],
-								                    (*ELEMENTO NULLO*)
-									                Style[Dynamic[matriceAB[[i, j]]], FontColor -> Red]
-									                
+							                    	(*ELEMENTO NULLO*)
+									                (*Style[Dynamic[matriceAB[[i, j]]], FontColor -> Red]*)
+									                InputField[
+													    Dynamic[inputUtente[[i,j]]],
+													    Number, 
+													    FieldSize -> {Automatic, 3},
+													    Alignment -> Center,
+													    Enabled-> userTry,
+													    Appearance-> If[!userTry, Frameless], (*feedback visivo inputfield per quando l'utente non ha ancora premuto "inizia"*)
+							
+													    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
+														(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
+														FieldHint -> 
+														    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
+														    ToString[rowsA]<>
+														    "\)]\)"<>
+														    ToString[TraditionalForm[Subscript[a, i, k]]]<>
+														    "*"<>
+														    ToString[TraditionalForm[Subscript[b, k, j]]]
+														 ,
+													    ImageSize -> {Full, Automatic},
+													    BaseStyle -> Bold
+			 										]
 							                    ],
 							                    
 							                    (*ELEMENTO INSERITO CORRETTO*)
@@ -258,7 +279,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 					
 											    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
 												(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
-												FieldHint ->
+												FieldHint -> 
 												    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
 												    ToString[rowsA]<>
 												    "\)]\)"<>
@@ -321,6 +342,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 						showErrors = True;
 						currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1;
 					],
+
 					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
@@ -329,6 +351,21 @@ GeneraInterfaccia[]:= DynamicModule[{
 					currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
 					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+				],
+				Spacer[20],
+				Dynamic@Button["Ritenta Soluzione", 
+					showErrors = False;
+					currentElement = 0;
+					(*ciclo su tutti gli elementi della matrice di input(input(tente), paragonarli alla matriceAB e se sono diversi in input matrice mettere = "" *)
+					Do[
+				        If[inputUtente[[i, j]] != matriceAB[[i, j]],
+				            inputUtente[[i, j]] = "";
+				        ],
+				        {i, Dimensions[inputUtente][[1]]},
+				        {j, Dimensions[inputUtente][[2]]}
+				    ],
+									
+					Enabled -> Not[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]], BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
 				Spacer[350],
 				Button["Pulisci",
@@ -412,6 +449,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 		SynchronousUpdating->True
 	]
 ]
+
 
 
 End[]
