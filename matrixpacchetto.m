@@ -258,7 +258,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 					
 											    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
 												(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
-												FieldHint -> 
+												FieldHint ->
 												    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
 												    ToString[rowsA]<>
 												    "\)]\)"<>
