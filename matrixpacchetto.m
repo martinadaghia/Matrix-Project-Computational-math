@@ -221,7 +221,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 							        
 							        (*Se stiamo generando l'elemento indice che \[EGrave] prima dell'ultimo elemento di cui si \[EGrave] richiesta la correzione*)
 							            If[indice <= currentElement,
-							            
+							            If[inputUtente[[i,j]]== Null, inputUtente[[i,j]] = ""];
 							            (*Se siamo in fase di verifica degli errori commessi e l'elemento inserito dell'utente \[EGrave] sbagliato*)
 							                If[showErrors && matriceAB[[i, j]] != inputUtente[[i, j]],
 							                    (*ELEMENTO NON CORRETTO*)
