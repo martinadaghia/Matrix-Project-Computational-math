@@ -221,7 +221,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 							        
 							        (*Se stiamo generando l'elemento indice che \[EGrave] prima dell'ultimo elemento di cui si \[EGrave] richiesta la correzione*)
 							            If[indice <= currentElement,
-							            
+							            If[inputUtente[[i,j]]== Null, inputUtente[[i,j]] = ""];
 							            (*Se siamo in fase di verifica degli errori commessi e l'elemento inserito dell'utente \[EGrave] sbagliato*)
 							                If[showErrors && matriceAB[[i, j]] != inputUtente[[i, j]],
 							                    (*ELEMENTO NON CORRETTO*)
@@ -247,13 +247,11 @@ GeneraInterfaccia[]:= DynamicModule[{
 							
 													    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
 														(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
-														FieldHint -> 
-														    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
-														    ToString[rowsA]<>
-														    "\)]\)"<>
-														    ToString[TraditionalForm[Subscript[a, i, k]]]<>
-														    "*"<>
-														    ToString[TraditionalForm[Subscript[b, k, j]]]
+														FieldHint ->  
+														"\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>ToString[rowsA]<>"\)]\)" 
+														<> ToString[TraditionalForm[Subscript[Symbol["a"], i, Symbol["k"]]], InputForm]
+														<> "*"
+														<> ToString[TraditionalForm[Subscript[Symbol["b"], Symbol["k"], j]], InputForm]
 														 ,
 													    ImageSize -> {Full, Automatic},
 													    BaseStyle -> Bold
@@ -276,16 +274,14 @@ GeneraInterfaccia[]:= DynamicModule[{
 											    Alignment -> Center,
 											    Enabled-> userTry,
 											    Appearance-> If[!userTry, Frameless], (*feedback visivo inputfield per quando l'utente non ha ancora premuto "inizia"*)
-					
+								
 											    DefaultBaseStyle -> {ShowStringCharacters -> False, ShowStringCharactersStyle -> "Placeholder"},
 												(* Mostriamo la formula parametrica per calcolare il valore di quella cella *)
 												FieldHint -> 
-												    "\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>
-												    ToString[rowsA]<>
-												    "\)]\)"<>
-												    ToString[TraditionalForm[Subscript[a, i, k]]]<>
-												    "*"<>
-												    ToString[TraditionalForm[Subscript[b, k, j]]]
+												"\!\(\*SubsuperscriptBox[\(\[Sum]\), \(k = 1\), \("<>ToString[rowsA]<>"\)]\)" 
+												<> ToString[TraditionalForm[Subscript[Symbol["a"], i, Symbol["k"]]], InputForm]
+												<> "*"
+												<> ToString[TraditionalForm[Subscript[Symbol["b"], Symbol["k"], j]], InputForm]
 												 ,
 											    ImageSize -> {Full, Automatic},
 											    BaseStyle -> Bold
