@@ -22,21 +22,20 @@ GeneraInterfaccia::usage="GeneraInterfaccia []
 	mostrare la soluzione generata dalla funzione e resettare l'ambiente di lavoro.";
 
 
+(*Definiamo il nostro pacchetto/contesto privato*)
 Begin["`Private`"]
 
 
-(*Implementiamo la nostra funzione*)
+(*Implementiamo la nostra funzione GeneraInterfaccia*)
 GeneraInterfaccia[]:= DynamicModule[{
-		 rowsA = 3,
-	     colA = 3,
-	     rowsB = 3,
-	     colB = 3,
-	     (*creiamo le matrici 3x3 con tutti valori 0*)
-		 matriceA = ConstantArray[0, {3, 3}], 
-	     matriceB = ConstantArray[0, {3, 3}],
-	     matriceAB = ConstantArray[0, {3, 3}],
-	     (*creiamo la matrice 3x3 con tutti valori vuoti per contenere l'input utente*)
-	     inputUtente = ConstantArray["", {3, 3}],
+		 rowsA = 3, (*varibile che mi rappresenta le righe della matrice A, che fissiamo come valore di default 3*)
+	     colA = 3, (*varibile che mi rappresenta le colonne della matrice A, che fissiamo come valore di default 3*)
+	     rowsB = 3, (*varibile che mi rappresenta le righe della matrice B, che fissiamo come valore di default 3*)
+	     colB = 3, (*varibile che mi rappresenta le colonne della matrice B, che fissiamo come valore di default 3*)
+		 matriceA = ConstantArray[0, {3, 3}], (*creiamo la matrice A con dimensioni 3 (righe) x 3(colonne) con tutti valori 0*)
+	     matriceB = ConstantArray[0, {3, 3}], (*creiamo la matrice B con dimensioni 3 (righe) x 3(colonne) con tutti valori 0*)
+	     matriceAB = ConstantArray[0, {3, 3}], (*creiamo la matrice AB (risultante) con dimensioni 3 (righe) x 3(colonne) con tutti valori 0*)
+	     inputUtente = ConstantArray["", {3, 3}], (*creiamo la matrice 3x3 con tutti valori vuoti per contenere l'input utente*)
 	     currentElement = 0, (*elemento della matrice input attualmente in verifica con AB*)
 	     randomFill = False, (*variabile bool che diventer\[AGrave] true se l'utente sceglie l'opzione random, se no rimarr\[AGrave] false*)
 	     justUpdated = False, (*variabile bool di controllo per sapere se le matrici random sono state generate oppure no*)
@@ -44,86 +43,137 @@ GeneraInterfaccia[]:= DynamicModule[{
 	     userTry = False, (*variabile bool di controllo per verificare se l'utente ha iniziato il suo tentativo oppure no*)
 	     seed = "" (*inizializziamo il valore del seed*)
     },
-    Manipulate[
+    
+    Manipulate[ (*creiamo una interfaccia interattiva*)
     
     (*Caso randomico*)
+    
+    (*Se la variabile randomFill \[EGrave] true (che significa che l'utente ha premuto sul bottone per il caso randomico) e il seed \[EGrave] diverso da vuoto (\[EGrave] pieno)*)
        If[randomFill && seed!="",
-          SeedRandom[seed];
+       (*utilizziamo la funzione SeedRandom per inizializzare il generatore di numeri casuali con quel determinato valore di seed*)
+          SeedRandom[seed]; 
           
-          (* Definite le dimensioni delle matrici
-          Non sono state generate le matrici random*)
+          (* Caso in cui vengono definite le dimensioni delle matrici *)
+          
+          (*Se non sono state generate le matrici random*)
           If[!justUpdated, 
             (*AB ha rowsA righe e colB colonne se colA=rowsB*)
-                justUpdated = True;
-			    showErrors = False;
-				currentElement=0;
-				(*le righe e le colonne avranno dei valori compresi tra questa lista*)
-                rowsA = RandomChoice[{1, 2, 3, 4, 5, 6}]; 
-                colA = RandomChoice[{1, 2, 3, 4, 5, 6}];
-                rowsB = colA;
-                colB = RandomChoice[{1, 2, 3, 4, 5, 6}]; 
+                justUpdated = True; (*setto la variabile booleana true poich\[EGrave] una volta che si entra in questo if, vengono generate le variabili random*)
+			    showErrors = False; (**)
+				currentElement=0; (**)
+                rowsA = RandomChoice[{1, 2, 3, 4, 5, 6}]; (*funzione che permette di selezionare casualmente un numero di righe per la matrice A dalla lista {1, 2, 3, 4, 5, 6}*)
+                colA = RandomChoice[{1, 2, 3, 4, 5, 6}]; (*funzione che permette di selezionare casualmente un numero di colonne per la matrice A dalla lista {1, 2, 3, 4, 5, 6}*)
+                rowsB = colA; (*assegno al numero di righe della matrice B lo stesso valore del numero di colonne della matrice A in quanto devono essere uguali per consentire il prodotto tra le 2 matrici*)
+                colB = RandomChoice[{1, 2, 3, 4, 5, 6}]; (*funzione che permette di selezionare casualmente un numero di colonne per la matrice B dalla lista {1, 2, 3, 4, 5, 6}*)
             ];
-            (*Riempimento matrici randomiche di numeri solo interi compresi tra -10 e 10*)
-            matriceA = RandomInteger[{-10, 10}, {rowsA, colA}];
-            matriceB = RandomInteger[{-10, 10}, {rowsB, colB}];
-            matriceAB = Dot[matriceA, matriceB]; (*prodotto tra matrice A e B*)
-			inputUtente = ConstantArray["", {rowsA, colB}]; (*matrice che mantiene in memoria l'input dell'utente su AB*)
-            justUpdated = False;
+            matriceA = RandomInteger[{-10, 10}, {rowsA, colA}]; (*Riempimento matrice A randomica di numeri soltanto interi compresi tra -10 e 10*)
+            matriceB = RandomInteger[{-10, 10}, {rowsB, colB}]; (*Riempimento matrice B randomica di numeri soltanto interi compresi tra -10 e 10*)
+            matriceAB = Dot[matriceA, matriceB]; (*la matrice AB rappresenta il prodotto tra matrice A e B, il prodtto viene effettuato dalla bult-in Dot*)
+			inputUtente = ConstantArray["", {rowsA, colB}]; (*matrice che mantiene in memoria l'input dell'utente sulla matrice AB*)
+            justUpdated = False; (*risettiamo la variabile a false una volta finiti tutti i passaggi per il caso randomico*)
        ];
          
         Column[{
         (*Attraverso l'inputfield prendo le dimensioni delle matrici, effettuo dei controlli e aggiorno*)
-            Row[{Style["Dimensione Matrice A: ", FontFamily -> "Helvetica"],
-                InputField[Dynamic[rowsA, 
-		(*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
-			se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
+        
+        (*Faccio inserire all'utente le dimensioni della matrice A attraverso il campo di input interattivo, 
+           il font del testo viene messo in tutto il codice come stile "Helvetica"*)
+            Row[{Style["Dimensione Matrice A: ", FontFamily -> "Helvetica"], 
+                InputField[Dynamic[rowsA, (*rowsA verr\[AGrave] aggiornata dinamicamente ogni volta che il valore nel campo di input viene modificato*)
+                
+					(*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
+					se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
 	                If[IntegerQ[#] && 1 <= # <= 6 , 
-	                rowsA = #;  (*assegno il valore inserito dell'utente nella variabile righe di A*)
-	                matriceA = ConstantArray[0, {rowsA, colA}]; (*creo la matrice a con tutti valori 0 in base alle righe e le colonne*)
+	                rowsA = #;  (*assegno il valore inserito dell'utente nella variabile rowsA che rappresenta le righe di A*)
+	                matriceA = ConstantArray[0, {rowsA, colA}]; (*creo la matrice A con tutti valori 0 in base alle righe e le colonne che gli passo come variabili*)
 	                userTry = False, (*resetta matrici se si verificano cambiamenti delle dimensioni*)
-			(*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
-				in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
+			
+						(*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
+						in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
 	                   If[StringMatchQ[ToString[#], "*.*"], 
 	                         MessageDialog["Inserire un numero intero, le dimensioni delle matrici non possono avere numeri decimali con il punto.\n Ad esempio dimensioni come 2.1, 4.5 non sono accettate, ma sono accettate dimensioni come 2, 4, 3."], 
 	                MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&], 
 	                
+	                (*viene creato come campo di input di tipo numerico con una dimensione di visualizzazione {4, 2} e viene allineato al centro.
+	                  questo campo viene abilitato o disabilitato in base al valore della variabile randomFill (se \[EGrave] true allora viene disabilitato o viceversa).
+	                  viene applicato uno stile utilizzando "Helvetica"*)
 	                Number, FieldSize -> {4, 2}, Alignment -> Center, Enabled -> !randomFill, BaseStyle -> {FontFamily -> "Helvetica"}
+
                 ],
-                " x ", 
-                InputField[Dynamic[colA,
+                
+                Style[" x ", FontFamily -> "Helvetica"], 
+
+                InputField[Dynamic[colA, (*colA verr\[AGrave] aggiornata dinamicamente ogni volta che il valore nel campo di input viene modificato*)
+                
+                (*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
+				se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
                 If[IntegerQ[#] && 1 <= # <= 6 , 
-                   colA = #; 
-                   matriceA = ConstantArray[0, {rowsA, colA}];
-                   userTry = False, 
+                   colA = #; (*assegno il valore inserito dell'utente nella variabile colA che rappresenta le righe di A*)
+                   matriceA = ConstantArray[0, {rowsA, colA}]; (*creo la matrice A con tutti valori 0 in base alle righe e le colonne che gli passo come variabili*)
+                   userTry = False, (*resetta matrici se si verificano cambiamenti delle dimensioni*)
+                   
+                   (*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
+				   in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],
+                
+                (*viene creato come campo di input di tipo numerico con una dimensione di visualizzazione {4, 2} e viene allineato al centro.
+	              questo campo viene abilitato o disabilitato in base al valore della variabile randomFill (se \[EGrave] true allora viene disabilitato o viceversa).
+	              viene applicato uno stile utilizzando "Helvetica"*)
                 Number, FieldSize -> {4, 2}, Alignment -> Center, Enabled -> !randomFill, BaseStyle -> {FontFamily -> "Helvetica"}]
             }],
+            
+            (*Faccio inserire all'utente le dimensioni della matrice B attraverso il campo di input interattivo, 
+            il font del testo viene messo in tutto il codice come stile "Helvetica"*)
             Row[{Style["Dimensione Matrice B: ", FontFamily -> "Helvetica"],
-                InputField[Dynamic[rowsB, 
+                InputField[Dynamic[rowsB, (*rowsB verr\[AGrave] aggiornata dinamicamente ogni volta che il valore nel campo di input viene modificato*)
+                
+                (*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
+				se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
                 If[IntegerQ[#] && 1 <= # <= 6 , 
-	               rowsB = #; 
-	               matriceB = ConstantArray[0, {rowsB, colB}];
-	               userTry = False, 
+	               rowsB = #; (*assegno il valore inserito dell'utente nella variabile rowsB che rappresenta le righe di B*)
+	               matriceB = ConstantArray[0, {rowsB, colB}]; (*creo la matrice B con tutti valori 0 in base alle righe e le colonne che gli passo come variabili*)
+	               userTry = False, (*resetta matrici se si verificano cambiamenti delle dimensioni*)
+	               
+	               (*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
+				   in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],  
+                
+                (*viene creato come campo di input di tipo numerico con una dimensione di visualizzazione {4, 2} e viene allineato al centro.
+	              questo campo viene abilitato o disabilitato in base al valore della variabile randomFill (se \[EGrave] true allora viene disabilitato o viceversa).
+	              viene applicato uno stile utilizzando "Helvetica"*)
                 Number, FieldSize -> {4, 2}, Alignment -> Center, Enabled -> !randomFill, BaseStyle -> {FontFamily -> "Helvetica"}],
-                " x ",
-                InputField[Dynamic[colB, 
+                
+                Style[" x ", FontFamily -> "Helvetica"],
+                
+                InputField[Dynamic[colB, (*colB verr\[AGrave] aggiornata dinamicamente ogni volta che il valore nel campo di input viene modificato*)
+                
+                (*Controllo che il numero che l'utente ha inserito sia un intero e sia un numero compreso tra 1 e 6,
+				se non lo \[EGrave] viene creata una finestra in cui viene dato un errore all'utente*)
                 If[IntegerQ[#] && 1 <= # <= 6 , 
-	               colB = #;
-	               matriceB = ConstantArray[0, {rowsB, colB}];
-	               userTry = False, 
+	               colB = #; (*assegno il valore inserito dell'utente nella variabile colB che rappresenta le colonne di B*)
+	               matriceB = ConstantArray[0, {rowsB, colB}]; (*creo la matrice B con tutti valori 0 in base alle righe e le colonne che gli passo come variabili*)
+	               userTry = False, (*resetta matrici se si verificano cambiamenti delle dimensioni*)
+	               
+	               (*Controllo che il numero inserito non contenga il punto, nel caso lo contenga mando all'utente un messaggio di errore,
+				   in quanto le dimensioni delle matrici devono essere per forza un numero intero senza virgola*)
                    If[StringMatchQ[ToString[#], "*.*"], 
                          MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"], 
                 MessageDialog["Inserire un numero intero positivo compreso tra 1 e 6"]]]&],
+                
+                (*viene creato come campo di input di tipo numerico con una dimensione di visualizzazione {4, 2} e viene allineato al centro.
+	              questo campo viene abilitato o disabilitato in base al valore della variabile randomFill (se \[EGrave] true allora viene disabilitato o viceversa).
+	              viene applicato uno stile utilizzando "Helvetica"*)
                 Number, FieldSize -> {4, 2}, Alignment -> Center, Enabled -> !randomFill, BaseStyle -> {FontFamily -> "Helvetica"}]
-            }, Alignment->Center],
-            Spacer[30],
+                
+            }, Alignment->Center], (*allineo tutta la riga al centro*)
+            
+            Spacer[30],  (*utilizzato per inserire uno spazio vuoto di lunghezza 30 all'interno della disposizione grafica*)
             Column[{
-	            Row[Spacer[10]{
+	            Row[Spacer[10]{ (*utilizzato per inserire uno spazio vuoto di lunghezza 10 all'interno della disposizione grafica*)
 		            Row[{
 			            Column[{
 			                Style["Matrice A: ", FontFamily -> "Helvetica"],
@@ -448,7 +498,9 @@ GeneraInterfaccia[]:= DynamicModule[{
 
 
 
+(*chiusura del contesto privato*)
 End[]
 
 
+(*chiusura del pacchetto*)
 EndPackage[]
