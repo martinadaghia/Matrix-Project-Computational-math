@@ -205,7 +205,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 			                ]
 			            }, Alignment->Center
 			            ],    
-			        Spacer[20],
+			        Spacer[20], (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 			        Column[{ Style["\[CenterDot]", Bold, FontFamily -> "Helvetica"]}]
 		            }],
 		            Row[{
@@ -234,13 +234,13 @@ GeneraInterfaccia[]:= DynamicModule[{
 			                    Frame -> All, Spacings -> {1, 1}, ItemSize -> {3, 2}
 			                ]
 			            }, Alignment->Center], 
-			            Spacer[20],
+			            Spacer[20], (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 			            Column[{Style["=", FontFamily -> "Helvetica"]}]	
    
 		            }]        
 	            }],
 				Dynamic@Column[{
-					Spacer[50],
+					Spacer[50], (*utilizzato per inserire uno spazio vuoto di lunghezza 50 all'interno della disposizione grafica*)
 					Dynamic@If[!randomFill, 
 					(*Se le colonne della matrice A sono uguali alle righe della matrice B, allora \[EGrave] possibile fare il prodotto tra le due matrici*)
 						Button["Inizia", 
@@ -256,7 +256,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 						Invisible[""] (*quando le matrici sono generate randomicamente l'utente potr\[AGrave] solamente iniziare l'esercizio senza cliccare il bottone "Inizia"*)
 					]
 					,
-					Spacer[50],
+					Spacer[50], (*utilizzato per inserire uno spazio vuoto di lunghezza 50 all'interno della disposizione grafica*)
 					Row[{
 					Column[{
 		                Style["Matrice A\[CenterDot]B:", FontFamily -> "Helvetica"],
@@ -346,7 +346,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 				            }, Alignment->Center]
 		                ]
 	                }, Alignment->Center],
-	                Spacer[80],
+	                Spacer[80], (*utilizzato per inserire uno spazio vuoto di lunghezza 80 all'interno della disposizione grafica*)
 	                Column[{
 			(*I bottoni risolvi precedente e risolvi successivo sono una "pseudo guida" per l'utente in cui si evidenziano le righe e le colonne delle matrici e la casellina corrispondente nella matrice AB in cui andr\[AGrave] inserito il calcolo.
 				Risolvi precedente ti consente di tornare indietro al passaggio precedente evidenziandoti il passo successivo, invece
@@ -368,11 +368,11 @@ GeneraInterfaccia[]:= DynamicModule[{
 								] 
 							}, 
 							Alignment->Center],
-							Spacer[80]	
+							Spacer[80] (*utilizzato per inserire uno spazio vuoto di lunghezza 80 all'interno della disposizione grafica*)
 	                }]
 		        }, Alignment->Center]
             }, Alignment->Center],
-            Spacer[20],
+            Spacer[20], (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 			Row[{
 			(*Verifica risultato
 				verifica il risultato inserito dall'utente mostrando gli errori che ha effettuato in rosso e di fianco la correzione e mostrando le risposte corrette in verde.
@@ -392,13 +392,13 @@ GeneraInterfaccia[]:= DynamicModule[{
 					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
-				Spacer[20], 
+				Spacer[20], (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 				Dynamic@Button["Mostra Soluzione", 
 					currentElement=(Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1,
 					Enabled->userTry && currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]],
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
-				Spacer[20],
+				Spacer[20], (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 				Dynamic@Button["Ritenta Soluzione", 
 					showErrors = False;
 					currentElement = 0;
@@ -413,7 +413,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 									
 					Enabled -> Not[currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]], BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				],
-				Spacer[350],
+				Spacer[350], (*utilizzato per inserire uno spazio vuoto di lunghezza 350 all'interno della disposizione grafica*)
 				Button["Pulisci",
 					userTry=False;
 					showErrors=False;
@@ -432,7 +432,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 				]
 			}, Alignment->Center]
 		}, Alignment->Center],
-		Row[ Spacer[20]{
+		Row[ Spacer[20]{ (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
 			Row[{
 				(*Se l'esercizio \[EGrave] impostato per generare matrici random mostro il bottone per passare alla modalit\[AGrave] manuale e viceversa*)
 				Dynamic@If[randomFill, 
@@ -461,7 +461,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 					]
 				]
 			}],
-			Spacer[500],
+			Spacer[500], (*utilizzato per inserire uno spazio vuoto di lunghezza 500 all'interno della disposizione grafica*)
 			(*Se siamo in modalit\[AGrave] random do la possibilit\[AGrave] di isnerire il seed e controllo che sia valido*)
 			Dynamic@If[randomFill,
 			    Column[{
@@ -490,8 +490,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 		TrackedSymbols:>{rowsA, colA, rowsB, colB, randomFill, seed, inputUtente, showErrors, userTry, matriceA, matriceB},
 		(*Aggiornamento sincrono
 		
-		currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
-		*)
+		currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]*)
 		SynchronousUpdating->True
 	]
 ]
