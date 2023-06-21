@@ -310,9 +310,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 							                    
 							                    (*ELEMENTO INSERITO CORRETTO*)
 						                        Style[Dynamic[matriceAB[[i, j]]], 
-							                        Background -> Dynamic@If[currentElement > -1 && currentElement < (Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]])+1 
-				                                    && indice == currentElement, 
-				                                       RGBColor[0, 255, 0, .2], White],
+							                        Background->White,
 				                                    FontColor -> RGBColor["#32aa52"] (*colore verde*)
 			                                    ]   
 						                    ],
@@ -432,11 +430,12 @@ GeneraInterfaccia[]:= DynamicModule[{
 				]
 			}, Alignment->Center]
 		}, Alignment->Center],
+		Dynamic@If[randomFill, Column[{Style[Text["Modalit\[AGrave] Matrici Random"], FontSize->60], Spacer[60]}], Column[{Style[Text["Modalit\[AGrave] Matrici Custom"], FontSize->60], Spacer[60]}]],
 		Row[ Spacer[20]{ (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
-			Row[{
+			Row[{Style[Text["Passa a: "], FontSize-> 38 ],
 				(*Se l'esercizio \[EGrave] impostato per generare matrici random mostro il bottone per passare alla modalit\[AGrave] manuale e viceversa*)
 				Dynamic@If[randomFill, 
-					Button["Riempi manualmente", 			
+					Button["Modalit\[AGrave] matrici personalizzate", 			
 						rowsA = 3; 
 						colA = 3; 
 						rowsB = 3; 
@@ -452,7 +451,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 						BaseStyle->{FontFamily -> "Helvetica", FontSize->30},
 						Enabled-> currentElement < Dimensions[matriceAB][[1]]*Dimensions[matriceAB][[2]]
 					], 
-					Button["Riempi randomicamente",
+					Button["Modalit\[AGrave] matrici randomiche",
 						randomFill = True;
 						userTry = True,
 						ImageSize->500,
@@ -465,8 +464,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 			(*Se siamo in modalit\[AGrave] random do la possibilit\[AGrave] di isnerire il seed e controllo che sia valido*)
 			Dynamic@If[randomFill,
 			    Column[{
-			        Style[Text["Random Seed : " Green], FontFamily -> "Helvetica", FontSize->30],
-			        InputField[Dynamic[seed,
+			        Style[Text["Random Seed: " InputField[Dynamic[seed,
 			            If[IntegerQ[#] && # >= 1,
 			                seed = #,
 			                If[StringMatchQ[ToString[#], "*-*"],
@@ -478,11 +476,15 @@ GeneraInterfaccia[]:= DynamicModule[{
 			                ]
 			            ]&],
 			            Number, FieldSize -> {16, 2},  BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+			        ] Green], FontFamily -> "Helvetica", FontSize->30],
+			        Dynamic@If[randomFill, 
+			            Style[Text["Premi invio per confermare il seed inserito"], FontColor->Gray, FontSize->25, ShowSyntaxStyles->False],
+			            Style[Text[""],  FontColor->White, FontSize->25, ShowSyntaxStyles->False]
 			        ]
 			    }],
 			    Column[{
-			        Style[Text["Random Seed : " Red], FontFamily -> "Helvetica", FontSize->30],
-			        InputField[Dynamic@seed, Number, FieldSize -> {16, 2}, Enabled -> False, BaseStyle->{FontFamily -> "Helvetica", FontSize->30}]
+			        Style[Text["Random Seed: " InputField[Dynamic@seed, Number, FieldSize -> {16, 2}, Enabled -> False, BaseStyle->{FontFamily -> "Helvetica", FontSize->30}] Red], ShowSyntaxStyles->False, FontFamily -> "Helvetica", FontSize->30],
+			        Style[Text[""],  FontColor->White, FontSize->25, ShowSyntaxStyles->False]
 			    }]
 			]
 		}],
