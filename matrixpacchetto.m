@@ -462,31 +462,56 @@ GeneraInterfaccia[]:= DynamicModule[{
 			}],
 			Spacer[500], (*utilizzato per inserire uno spazio vuoto di lunghezza 500 all'interno della disposizione grafica*)
 			(*Se siamo in modalit\[AGrave] random do la possibilit\[AGrave] di isnerire il seed e controllo che sia valido*)
+			Column[{
 			Dynamic@If[randomFill,
 			    Column[{
-			        Style[Text["Random Seed: " InputField[Dynamic[seed,
-			            If[IntegerQ[#] && # >= 1,
-			                seed = #,
-			                If[StringMatchQ[ToString[#], "*-*"],
+			        Style[Text["Random Seed: " InputField[Dynamic@inputValue,
+			            Number, FieldSize -> {16, 2},  
+			            BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+			        ] Green], FontFamily -> "Helvetica", FontSize->30]
+			    }],
+			    Column[{
+			        Style[Text["Random Seed: " InputField[Dynamic@inputValue, 
+			            Number, FieldSize -> {16, 2}, 
+			            Enabled -> False, 
+			            BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+			            ] Red], ShowSyntaxStyles->False, FontFamily -> "Helvetica", FontSize->30]
+			    }]
+			],
+			Spacer[20],
+			Dynamic@If[randomFill,
+			 Button["Conferma seed", 
+		      If[IntegerQ[inputValue] && inputValue >= 1,
+			                seed = inputValue,
+			                If[StringMatchQ[ToString[inputValue], "*-*"],
 			                    MessageDialog["Il seed deve essere positivo."],
-			                    If[StringMatchQ[ToString[#], "*.*"],
+			                    If[StringMatchQ[ToString[inputValue], "*.*"],
 			                        MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"],
 			                        MessageDialog["Inserire un numero intero positivo maggiore o uguale a 1"]
 			                    ]
 			                ]
-			            ]&],
-			            Number, FieldSize -> {16, 2},  BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
-			        ] Green], FontFamily -> "Helvetica", FontSize->30],
-			        Dynamic@If[randomFill, 
-			            Style[Text["Premi invio per confermare il seed inserito"], FontColor->Gray, FontSize->25, ShowSyntaxStyles->False],
-			            Style[Text[""],  FontColor->White, FontSize->25, ShowSyntaxStyles->False]
-			        ]
-			    }],
-			    Column[{
-			        Style[Text["Random Seed: " InputField[Dynamic@seed, Number, FieldSize -> {16, 2}, Enabled -> False, BaseStyle->{FontFamily -> "Helvetica", FontSize->30}] Red], ShowSyntaxStyles->False, FontFamily -> "Helvetica", FontSize->30],
-			        Style[Text[""],  FontColor->White, FontSize->25, ShowSyntaxStyles->False]
-			    }]
-			]
+			            ], 
+			            ImageSize->{300,50}, 
+			            Enabled->True, 
+						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+ 		      ],
+ 		      Button["Conferma seed", 
+		      If[IntegerQ[inputValue] && inputValue >= 1,
+			                seed = inputValue,
+			                If[StringMatchQ[ToString[inputValue], "*-*"],
+			                    MessageDialog["Il seed deve essere positivo."],
+			                    If[StringMatchQ[ToString[inputValue], "*.*"],
+			                        MessageDialog["Inserire un numero maggiore o uguale a 1 e senza virgola"],
+			                        MessageDialog["Inserire un numero intero positivo maggiore o uguale a 1"]
+			                    ]
+			                ]
+			            ], 
+			            ImageSize->{300,50}, 
+			            Enabled->False, 
+						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
+ 		      ]
+ 		   ]
+ 		      }]
 		}],
 		(*Variabili che scatenano l'aggiornamento dell'interfaccia dinamica quando vengono modificati*)
 		TrackedSymbols:>{rowsA, colA, rowsB, colB, randomFill, seed, inputUtente, showErrors, userTry, matriceA, matriceB},
