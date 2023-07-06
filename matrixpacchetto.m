@@ -433,9 +433,9 @@ GeneraInterfaccia[]:= DynamicModule[{
 				]
 			}, Alignment->Center]
 		}, Alignment->Center],
-		Dynamic@If[randomFill, Column[{Style[Text["Modalit\[AGrave] Matrici Random"], FontSize->60], Spacer[60]}], Column[{Style[Text["Modalit\[AGrave] Matrici Custom"], FontSize->60], Spacer[60]}]],
+		Dynamic@If[randomFill, Column[{Style[Text["Modalit\[AGrave] Matrici Random", BaseStyle->{FontFamily -> "Helvetica", FontSize->60}]], Spacer[60]}], Column[{Style[Text["Modalit\[AGrave] Matrici Custom", BaseStyle->{FontFamily -> "Helvetica", FontSize->60}]], Spacer[60]}]],
 		Row[ Spacer[20]{ (*utilizzato per inserire uno spazio vuoto di lunghezza 20 all'interno della disposizione grafica*)
-			Row[{Style[Text["Passa a: "], FontSize-> 38 ],
+			Row[{Style[Text["Passa a: ", BaseStyle->{FontFamily -> "Helvetica", FontSize->38}]],
 				(*Se l'esercizio \[EGrave] impostato per generare matrici random mostro il bottone per passare alla modalit\[AGrave] manuale e viceversa*)
 				Dynamic@If[randomFill, 
 					Button["Modalit\[AGrave] matrici personalizzate", 			
