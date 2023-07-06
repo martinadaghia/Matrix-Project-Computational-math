@@ -41,7 +41,8 @@ GeneraInterfaccia[]:= DynamicModule[{
 	     justUpdated = False, (*variabile bool di controllo per sapere se le matrici random sono state generate oppure no*)
 	     showErrors = False, (*variabile bool di controllo per attivare la visualizzazione di errori*)
 	     userTry = False, (*variabile bool di controllo per verificare se l'utente ha iniziato il suo tentativo oppure no*)
-	     seed = "" (*inizializziamo il valore del seed*)
+	     seed = "", (*inizializziamo il valore del seed*)
+	     inputValue=""
     },
     
     Manipulate[ (*creiamo una interfaccia interattiva*)
@@ -417,6 +418,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 					showErrors=False;
 					currentElement=0;
 					seed="";
+					inputValue="";
 					rowsA = 3; 
 					colA = 3; 
 					rowsB = 3; 
@@ -425,7 +427,8 @@ GeneraInterfaccia[]:= DynamicModule[{
 					matriceA = ConstantArray[0,{rowsA,colA}];
 					matriceB = ConstantArray[0,{rowsB,colB}];
 					matriceAB = Dot[matriceA, matriceB];
-					inputUtente = ConstantArray["", {rowsA, colB}],
+					inputUtente = ConstantArray["", {rowsA, colB}];
+					ImageSize->500,
 					BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
 				]
 			}, Alignment->Center]
@@ -443,6 +446,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 						matriceAB = ConstantArray[0, {rowsB, colA}];
 						inputUtente = ConstantArray["", {rowsB, colA}];
 						seed="";	
+						inputValue="";
 						matriceA = ConstantArray[0,{rowsA, colA}];
 						matriceB = ConstantArray[0,{rowsB, colB}];
 						randomFill = False;
@@ -479,7 +483,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 			    }]
 			],
 			Spacer[20],
-			Dynamic@If[randomFill,
+			Dynamic@If[randomFill, 
 			 Button["Conferma seed", 
 		      If[IntegerQ[inputValue] && inputValue >= 1,
 			                seed = inputValue,
@@ -495,7 +499,7 @@ GeneraInterfaccia[]:= DynamicModule[{
 			            Enabled->True, 
 						BaseStyle->{FontFamily -> "Helvetica", FontSize->30}
  		      ],
- 		      Button["Conferma seed", 
+ 		       Button["Conferma seed", 
 		      If[IntegerQ[inputValue] && inputValue >= 1,
 			                seed = inputValue,
 			                If[StringMatchQ[ToString[inputValue], "*-*"],
